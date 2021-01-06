@@ -1,1 +1,1 @@
-web: node npm run eb-start
+web: node server.compiled.js
