@@ -19,5 +19,5 @@ app.get('/flower', function (req, res) {
   });
 });
 app.listen(PORT, function () {
-  console.log("Server listening at port ".concat(PORT, "."));
+  console.log("Server listening at port ".concat(PORT, ". cwm"));
 });
