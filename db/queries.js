@@ -49,7 +49,7 @@ const addItemToOrder= (params, cb) => {
 }
 
 const getOrders = (cb)=>{
-  connection.query('SELECT cart.id, order_item.quantity, product.product_name, product.price, orders.scheduled_delivery, orders.neighborhood, orders.name, orders.street_address, orders.phone, orders.email FROM ((order_item INNER JOIN product ON order_item.product_id = product.id) INNER JOIN orders on order_item.order_id = orders.id);', (err, result)=>{
+  connection.query('SELECT orders.id, order_item.quantity, product.product_name, product.price, orders.scheduled_delivery, orders.neighborhood, orders.name, orders.street_address, orders.phone, orders.email FROM ((order_item INNER JOIN product ON order_item.product_id = product.id) INNER JOIN orders on order_item.order_id = orders.id);', (err, result)=>{
   if (err) {
     cb (err, null)
   } else {
