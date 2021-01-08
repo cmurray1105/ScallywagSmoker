@@ -29,7 +29,7 @@ const getProducts = (category, cb) =>{
 })
 }
 const addDelivery = (params, cb) => {
-  connection.query('INSERT INTO cart (street_address, name, city, ordered_at, scheduled_delivery, neighborhood, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?);', params, (err, results)=>{
+  connection.query('INSERT INTO orders (street_address, name, city, ordered_at, scheduled_delivery, neighborhood, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?);', params, (err, results)=>{
     if (err) {
       cb(err, null)
     } else {
@@ -39,7 +39,7 @@ const addDelivery = (params, cb) => {
 }
 const addItemToOrder= (params, cb) => {
   // console.log("params", typeof params)
-  connection.query('INSERT INTO cart_item (product_id, cart_id, quantity) VALUES (?, ?, ?);', params, (err, result)=>{
+  connection.query('INSERT INTO order_item (product_id, order_id, quantity) VALUES (?, ?, ?);', params, (err, result)=>{
     if (err) {
       cb(err, null)
     } else {
@@ -49,7 +49,7 @@ const addItemToOrder= (params, cb) => {
 }
 
 const getOrders = (cb)=>{
-  connection.query('SELECT cart.id, cart_item.quantity, product.product_name, product.price, cart.scheduled_delivery, cart.neighborhood, cart.name, cart.street_address, cart.phone, cart.email FROM ((cart_item INNER JOIN product ON cart_item.product_id = product.id) INNER JOIN cart on cart_item.cart_id = cart.id);', (err, result)=>{
+  connection.query('SELECT cart.id, order_item.quantity, product.product_name, product.price, orders.scheduled_delivery, orders.neighborhood, orders.name, orders.street_address, orders.phone, orders.email FROM ((order_item INNER JOIN product ON order_item.product_id = product.id) INNER JOIN orders on order_item.order_id = orders.id);', (err, result)=>{
   if (err) {
     cb (err, null)
   } else {
