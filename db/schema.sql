@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS barbecue;
 DROP DATABASE IF EXISTS ebdb;
 
 CREATE DATABASE ebdb;
@@ -59,9 +58,9 @@ INSERT INTO product (product_name, category, quantity, image_url, price) VALUES 
 
 INSERT INTO product (product_name, category, quantity, image_url, price) VALUES ('Pirate Platter', 'Combos', 12, 'https://bbqbucket2020.s3.us-east-2.amazonaws.com/sausage.jpg', 40.00);
 
-INSERT INTO product (product_name, category, quantity, image_url, price) VALUES ('Whole Pork Butt', 'Catering', 8, 'https:///bbqbucket2020.s3.us-east-2.amazonaws.com/sausage.jpg', 50.00);
+INSERT INTO product (product_name, category, quantity, image_url, price) VALUES ('Whole Pork Butt', 'Catering', 8, 'https://bbqbucket2020.s3.us-east-2.amazonaws.com/pork.jpg', 50.00);
 
-INSERT INTO product (product_name, category, quantity, image_url, price) VALUES ('Whole USDA Prime Brisket', 'Catering', 8, 'https:///bbqbucket2020.s3.us-east-2.amazonaws.com/sausage.jpg', 100.00);
+INSERT INTO product (product_name, category, quantity, image_url, price) VALUES ('Whole USDA Prime Brisket', 'Catering', 8, 'https://bbqbucket2020.s3.us-east-2.amazonaws.com/whole+brisket.jpg', 100.00);
 
 
 INSERT INTO orders (street_address, name, city, ordered_at, scheduled_delivery, neighborhood) VALUES ('349 Vista Portola Loop', 'Christopher Murray', 'Liberty Hill', '2020-12-23 12:00:00', '2020-12-30 12:00:00', 'Santa Rita Ranch South');
@@ -78,4 +77,4 @@ INSERT INTO order_item (product_id, order_id, quantity) VALUES (5, 2, 1);
 
 INSERT INTO order_item (product_id, order_id, quantity) VALUES (1, 2, 2);
 
--- SELECT orders.id, order_item.quantity, product.product_name, product.price, orders.scheduled_delivery, orders.neighborhood, orders.name, orders.street_address, orders.phone, orders.email FROM ((order_item INNER JOIN product ON order_item.product_id = product.id) INNER JOIN orders on order_item.order_id = orders.id);
+SELECT orders.id, order_item.quantity, product.product_name, product.price, orders.scheduled_delivery, orders.neighborhood, orders.name, orders.street_address, orders.phone, orders.email FROM ((order_item INNER JOIN product ON order_item.product_id = product.id) INNER JOIN orders on order_item.order_id = orders.id);

@@ -33,9 +33,10 @@ function Menu(props) {
         <Tabs
           className="tab-content"
           value={value}
+          variant="scrollable"
           scrollButtons="auto"
           onChange={handleChange}
-          centered
+
 
         >
           <Tab className="menuTab" label="Meats">
