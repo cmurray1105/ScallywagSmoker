@@ -25,7 +25,6 @@ class Home extends React.Component {
 
   }
   getProducts(category) {
-    // console.log('meat function', category)
     Axios.get('/products',
     {params: {
       product: category
@@ -37,14 +36,12 @@ class Home extends React.Component {
         products: result.data,
         loaded: true
       })
-      console.log("products", this.state.products)
     })
     .catch((err)=>{
       console.log(err)
     })
   }
   handleCategorySelected(category){
-    console.log(category)
   }
   addToCart(item) {
     let ids = this.state.productIds;
@@ -55,10 +52,17 @@ class Home extends React.Component {
     } else {
       cartItems[item.productName].quantity += item.quantity
     }
-    console.log(item.price, "x", item.quantity, "=", (item.price * item.quantity))
     total += (item.price * item.quantity)
-    this.setState({cart: cartItems,total: total})
-    console.log("CART AFTER UPDATE", this.state.cart)
+    let priceString = total.toString()
+    if (priceString.includes('.')){
+    if(priceString.split('.')[1].length ===1){
+      priceString += '0'
+    }
+    if(priceString.split('.')[1].length > 2){
+      priceString = priceString.split('.')[0] + '.' + priceString.split('.')[1].slice(0,2)
+    }
+  }
+    this.setState({cart: cartItems,total: parseInt(priceString)})
   }
 
   clearOrder() {

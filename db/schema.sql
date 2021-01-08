@@ -1,8 +1,8 @@
 DROP DATABASE IF EXISTS barbecue;
 
-CREATE DATABASE barbecue;
+CREATE DATABASE ebdb;
 
-USE barbecue;
+USE ebdb;
 
 CREATE TABLE product (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -13,7 +13,7 @@ CREATE TABLE product (
   price DECIMAL(10,2) NOT NULL
 );
 
-CREATE TABLE cart (
+CREATE TABLE orders (
 id INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(255) NOT NULL,
 street_address VARCHAR(255),
@@ -25,7 +25,7 @@ email VARCHAR(255),
 phone VARCHAR(255)
 );
 
-CREATE TABLE cart_item (
+CREATE TABLE order_item (
   id INT PRIMARY KEY AUTO_INCREMENT,
   product_id INT NOT NULL,
   cart_id INT NOT NULL,

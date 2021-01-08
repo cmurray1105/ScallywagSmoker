@@ -41,7 +41,7 @@ export default function CheckoutModal(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("./addOrder", {
+.post("/addOrder", {
         address: streetAddress,
         customerName: customerName,
         deliveryDate: startDate,
@@ -51,12 +51,7 @@ export default function CheckoutModal(props) {
         phone: phone
       })
       .then((result) => {
-        console.log(result);
-        console.log("cart Items", props.cartItems);
-        let newQuantities = {}
         for (let item in props.cartItems){
-          console.log("ITEMMMM", props.cartItems[item])
-          console.log(props.products.quantity)
           axios
           .post('./updateQuantity', {quantity: (props.cartItems[item].originalQuantity - props.cartItems[item].quantity), productName: item}).then((result)=>{
             console.log("result of update", result)
@@ -74,16 +69,8 @@ export default function CheckoutModal(props) {
             console.log(err);
           }
         })
-          // newQuantities[item] = {quantity: props.products.quantity - props.cartItems[item].quantity, id:
         }
-        // axios
-        //   .post('/changeQuantity', {})
 
-
-
-  // React.useEffect(() => {
-  //   console.log(props);
-  // });
   const body = (
     <div className={classes.paper}>
       <h2 id="simple-modal-title">Delivery Info</h2>

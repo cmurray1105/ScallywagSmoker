@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node server.js --ignore client",
+    "start": "nodemon --exec babel-node server.js",
     "build": "babel server.js --out-file server.compiled.js",
     "start-eb": "node server.compiled.js"
   },
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/cmurray1105/ScallywagSmoker#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql": "^2.18.1",

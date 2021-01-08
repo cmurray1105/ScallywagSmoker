@@ -8,9 +8,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var db = require('./db/queries');
 
+var bodyParser = require('body-parser');
+
 var PORT = process.env.HTTP_PORT || 8080;
 var app = (0, _express["default"])();
 app.use(_express["default"]["static"](_path["default"].join(__dirname, 'client', 'build')));
+app.use(bodyParser.json());
 app.get('/', function (req, res) {
   res.send('just gonna send it');
 });
@@ -32,7 +35,7 @@ app.get('/products', function (req, res) {
   });
 });
 app.post('/addOrder', function (req, res) {
-  console.log('query', req.body.address);
+  console.log('query', req.body);
   var currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
   console.log("del date", req.body.deliveryDate.slice(0, 19).replace('T', ' '));
   var order = [req.body.address, req.body.customerName, 'Liberty Hill', currentDate, req.body.deliveryDate.slice(0, 19).replace('T', ' '), req.body.neighborhood, req.body.email, req.body.phone]; // console.log("order:", order)
@@ -75,7 +78,8 @@ app.post('/updateQuantity', function (req, res) {
 });
 app.get('/getOrders', function (req, res) {
   db.getOrders(function (err, result) {
-    console.log("RESULTTTTT1", result); // result = result[0]
+    console.log("RESULTTTTT1", result);
+    result = result[0];
 
     if (err) {
       console.log(err);

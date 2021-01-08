@@ -1,9 +1,14 @@
 import path from 'path';
 import express from 'express';
 const db = require('./db/queries')
+const bodyParser = require('body-parser')
 const PORT = process.env.HTTP_PORT || 8080;
 const app = express();
+
+
 app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(bodyParser.json())
+
 app.get('/', (req, res) => {
   res.send('just gonna send it');
 });
@@ -25,7 +30,7 @@ app.get('/products', (req, res)=>{
   })
 })
 app.post('/addOrder', (req, res)=>{
-  console.log('query', req.body.address)
+  console.log('query', req.body)
   let currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
   console.log("del date", req.body.deliveryDate.slice(0, 19).replace('T', ' '))
   const order = [req.body.address, req.body.customerName, 'Liberty Hill', currentDate, req.body.deliveryDate.slice(0, 19).replace('T', ' '), req.body.neighborhood, req.body.email, req.body.phone]
@@ -37,7 +42,7 @@ app.post('/addOrder', (req, res)=>{
     } else {
       // console.log("RESULT FROM ADDING", results.insertId)
       let id = results.insertId
-      for (item in req.body.cartItems){
+      for (let item in req.body.cartItems){
       let params = [req.body.cartItems[item].id, id, req.body.cartItems[item].quantity]
       db.addItemToOrder(params, (err, secondResult) =>{
         // console.log("callback called")
