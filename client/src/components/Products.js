@@ -14,22 +14,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import ProductModal from './ProductModal';
 
 const Products = ({ loaded, products, addToCart, cartItems}) => {
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
   const [open, setOpen] = React.useState(false);
   const [quantity, handleChange] = React.useState("0");
   const [customerName, handleNameChange] = React.useState("");
   const [currentProduct, setProduct] = React.useState({});
   console.log("T/F?", !cartItems)
-  // let currentQuantity = 0
   let selectedQuantity = 0
   let currentQuantity = currentProduct.quantity
-  // const [value, handleChange] = React.useState('');
+
   const useStyles = makeStyles({
     root: {
       width: 250,
@@ -84,6 +76,14 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
     handleClose();
   }
 }
+  let createPullDown = () => {
+      let items = [];
+      for (let i = 0; i <= currentQuantity; i++) {
+           items.push(<option value={i}>{i}</option>);
+      }
+      return items;
+  }
+
   const body = (
     <div className="paper">
       <h2 id="simple-modal-title">{currentProduct.product_name}</h2>
@@ -96,12 +96,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
           <label>
             Quantity:
             <select onChange={(e) => handleChange(e.target.value)}>
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+              {createPullDown()}
             </select>
           </label>
           <Button type="submit">
