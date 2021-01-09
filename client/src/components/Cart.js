@@ -20,7 +20,7 @@ const Cart = (props) =>{
   }
   return(
   <div>
-  <CheckoutModal clearOrder={props.clearOrder} total={props.total} products={props.products} cartItems={props.cartItems}/>
+  <CheckoutModal clearOrder={props.clearOrder} priceString={priceString} total={props.total} products={props.products} cartItems={props.cartItems}/>
   Total Due:
   ${priceString}
   </div>

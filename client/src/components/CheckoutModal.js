@@ -23,6 +23,7 @@ export default function CheckoutModal(props) {
     paper: {
       position: "absolute",
       width: 400,
+      maxHeight: 800,
       backgroundColor: theme.palette.background.paper,
       border: "2px solid #000",
       boxShadow: theme.shadows[5],
@@ -107,7 +108,7 @@ export default function CheckoutModal(props) {
   const body = (
     <div className={classes.paper}>
       <h2 id="simple-modal-title">Delivery Info</h2>
-      <h3>Total ${props.total}</h3>
+      <h3>Total ${props.priceString}</h3>
       <div className="order-summary"></div>
       <div className="order-form">
         <form onSubmit={handleSubmit}>
