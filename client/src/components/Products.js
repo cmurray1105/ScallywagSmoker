@@ -115,10 +115,10 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
       <div className="box-container">
         <Box
           display="flex"
-          flexwrap="nowrap"
+          // flexwrap="nowrap"
           p={1}
           m={1}
-          bgcolor="background.paper"
+          // bgcolor="background.paper"
           css={{ maxWidth: 300 }}
         >
           {productData.map((product) => {
@@ -134,7 +134,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
             }
 
             return (
-              <Box p={1} bgcolor="grey.300">
+              <Box p={1} >
               <div className="cardContainer">
                 <Card
                   className={classes.root}

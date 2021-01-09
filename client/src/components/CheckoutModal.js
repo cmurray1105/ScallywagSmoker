@@ -183,7 +183,7 @@ export default function CheckoutModal(props) {
   console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
   return (
     <div>
-      <Button className="checkoutButton" onClick={handleOpen}>
+      <Button backgroundColor="grey" className="checkoutButton" onClick={handleOpen}>
       {/* <FontAwesomeIcon icon={["far", "coffee"]} /> */}
       Checkout
       </Button>
