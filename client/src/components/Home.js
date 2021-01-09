@@ -53,23 +53,25 @@ class Home extends React.Component {
     } else {
       cartItems[item.productName].quantity += item.quantity;
     }
+    console.log("TOTAL TYPE", typeof total)
     total += item.price * item.quantity;
-    let priceString = total.toString();
-    if (priceString.includes(".")) {
-      if (priceString.split(".")[1].length === 1) {
-        priceString += "0";
-      }
-      if (priceString.split(".")[1].length > 2) {
-        priceString =
-          priceString.split(".")[0] +
-          "." +
-          priceString.split(".")[1].slice(0, 2);
-      }
-    } else {
-      priceString += ".00";
-    }
+    // let priceString = total.toString();
+    // if (priceString.includes(".")) {
+    //   if (priceString.split(".")[1].length === 1) {
+    //     priceString += "0";
+    //   }
+    //   if (priceString.split(".")[1].length > 2) {
+    //     priceString =
+    //       priceString.split(".")[0] +
+    //       "." +
+    //       priceString.split(".")[1].slice(0, 2);
+    //   }
+    // } else {
+    //   priceString += ".00";
+    // }
+    console.log("parse", parseInt(total))
     // console.log("PRICE", parseInt(priceString))
-    this.setState({ cart: cartItems, total: priceString });
+    this.setState({ cart: cartItems, total: total });
   }
 
   clearOrder() {
