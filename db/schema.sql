@@ -56,7 +56,7 @@ INSERT INTO product (product_name, category, quantity, image_url, price) VALUES 
 
 INSERT INTO product (product_name, category, quantity, image_url, price) VALUES ('Potato Salad', 'Sides', 35, 'https://bbqbucket2020.s3.us-east-2.amazonaws.com/potato+salad.jpeg', 5.50);
 
-INSERT INTO product (product_name, category, quantity, image_url, price) VALUES ('Pirate Platter', 'Combos', 12, 'https://bbqbucket2020.s3.us-east-2.amazonaws.com/sausage.jpg', 40.00);
+INSERT INTO product (product_name, category, quantity, image_url, price) VALUES ('Pirate Platter', 'Combos', 12, 'https://bbqbucket2020.s3.us-east-2.amazonaws.com/pirate+platter.jpg', 40.00);
 
 INSERT INTO product (product_name, category, quantity, image_url, price) VALUES ('Whole Pork Butt', 'Catering', 8, 'https://bbqbucket2020.s3.us-east-2.amazonaws.com/pork.jpg', 50.00);
 

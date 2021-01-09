@@ -10,7 +10,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import ProductModal from './ProductModal';
 
 const Products = ({ loaded, products, addToCart, cartItems}) => {
@@ -58,9 +57,9 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
   // }
 
   const handleSubmit = (event) => {
-    console.log("selected", currentQuantity - selectedQuantity)
+    console.log("currentQuantity", currentQuantity, "selectedQuantity", selectedQuantity)
     event.preventDefault();
-    console.log("currentProduct", currentProduct.quantity)
+    console.log("currentProduct.quantity", currentProduct.quantity, "selectedQuantity", selectedQuantity)
     if ((currentQuantity - selectedQuantity) < 0){
 
       alert(`Please select another quantity. Only ${currentQuantity} left!`)

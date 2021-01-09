@@ -10,13 +10,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Row from './Row'
 
-const useRowStyles = makeStyles({
-  root: {
-    '& > *': {
-      borderBottom: 'unset',
-    },
-  },
-});
+// const useRowStyles = makeStyles({
+//   root: {
+//     '& > *': {
+//       borderBottom: 'unset',
+//     },
+//   },
+// });
 class Orders extends React.Component {
   constructor(props) {
     super(props);

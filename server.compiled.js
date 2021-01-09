@@ -66,7 +66,7 @@ app.post("/addOrder", function (req, res) {
 });
 app.post("/updateQuantity", function (req, res) {
   console.log(req.body.quantity, req.body.productName);
-  var quantity = [req.body.quantity, req.body.productName];
+  var quantity = [req.body.quantity.toString(), req.body.productName];
   db.updateQuantity(quantity, function (err, result) {
     if (err) {
       res.send(err);
