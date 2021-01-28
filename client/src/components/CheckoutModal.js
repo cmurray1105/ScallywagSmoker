@@ -6,6 +6,10 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import * as emailjs from 'emailjs-com'
+// import DayPicker from 'react-day-picker';
+// import DayPickerInput from 'react-day-picker/DayPickerInput';
+// import 'react-day-picker/lib/style.css';
+
 
 emailjs.init("user_975JwJzPB6r4yxiDzOfHn");
 
@@ -171,7 +175,15 @@ export default function CheckoutModal(props) {
             <DatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}
-            />
+              minDate={new Date()}
+              maxDate={new Date(2021, 1, 31)}
+      //         disabledDays={[
+      //   {
+      //     after: new Date(2021, 1, 31),
+      //     before: new Date(),
+      //   }
+      // ]}
+      />
             {/* <br/> */}
           </label>
           <br />

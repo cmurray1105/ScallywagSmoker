@@ -26,6 +26,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
       width: 250,
       marginTop: 25,
       marginBottom: 25,
+      height: 400
     },
     media: {
       height: 250,
@@ -138,6 +139,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
               <div className="cardContainer">
                 <Card
                   className={classes.root}
+                  height={400}
                   onClick={() => {
                     setProduct(product);
                     handleOpen();
@@ -149,6 +151,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
                       className={classes.media}
                       image={product.image_url}
                       title={product.product_name}
+                      // height={200px}
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">
