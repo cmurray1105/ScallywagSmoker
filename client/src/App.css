@@ -5,12 +5,12 @@
 .container {
   display: grid;
   grid-template-columns:
- 1fr 1fr 1fr;
+ 1fr 1fr 1fr 1fr;
 grid-template-rows:
   1fr 3fr;
 grid-template-areas:
-  "head head head"
-  "body body list"
+  "head head head head"
+  "blank body body list"
 }
 .body {
   grid-area: body;
