@@ -18,11 +18,31 @@ const Cart = (props) =>{
   } else {
     priceString += ".00";
   }
+  let itemMap = null;
+  if (props.cartItems){
+    console.log(Object.keys(props.cartItems), "item length")
+    let selectedItems = Object.keys(props.cartItems);
+    console.log("products", props.products, "selected Items", typeof selectedItems[0])
+    itemMap = selectedItems.map((item)=>(
+      <div>
+        {item}: $
+      </div>
+    ))
+  }
+//   React.useEffect(()=>{
+  // props.cartItems.forEach((item)=>{
+  //   console.log("cart item", item)
+
+//   })
+// })
   return(
   <div>
   <CheckoutModal clearOrder={props.clearOrder} priceString={priceString} total={props.total} products={props.products} cartItems={props.cartItems}/>
   Total Due:
   ${priceString}
+  {itemMap}
+
+
   </div>
 
   )

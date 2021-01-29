@@ -1,11 +1,12 @@
-import React from "react";
+// import React from "react";
 import Banner from "./Banner";
 import Cart from "./Cart";
 import Menu from "./Menu";
 import Axios from "axios";
+import { Component } from 'React';
 // import './bootstrap/dist/css/bootstrap.min.css';
 // import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-class Home extends React.Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,38 +40,24 @@ class Home extends React.Component {
         console.log(err);
       });
   }
-  handleCategorySelected(category) {}
   addToCart(item) {
     // let ids = this.state.productIds;
     let total = this.state.total;
     let cartItems = this.state.cart;
+    console.log("ITEMMMM", item)
     if (!cartItems[item.productName]) {
       cartItems[item.productName] = {
         quantity: item.quantity,
         id: item.id,
         originalQuantity: item.originalQuantity,
+        price: item.price
       };
     } else {
       cartItems[item.productName].quantity += item.quantity;
     }
     console.log("TOTAL TYPE", typeof total)
     total += item.price * item.quantity;
-    // let priceString = total.toString();
-    // if (priceString.includes(".")) {
-    //   if (priceString.split(".")[1].length === 1) {
-    //     priceString += "0";
-    //   }
-    //   if (priceString.split(".")[1].length > 2) {
-    //     priceString =
-    //       priceString.split(".")[0] +
-    //       "." +
-    //       priceString.split(".")[1].slice(0, 2);
-    //   }
-    // } else {
-    //   priceString += ".00";
-    // }
     console.log("parse", parseInt(total))
-    // console.log("PRICE", parseInt(priceString))
     this.setState({ cart: cartItems, total: total });
   }
 

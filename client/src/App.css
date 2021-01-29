@@ -18,6 +18,7 @@ grid-template-areas:
 }
 .bbqList {
 grid-area: list;
+margin-left: 50px
 }
 .menuTabs {
   border:2px solid green;
