@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import Grid from "@material-ui/core/Grid";
 // import ProductModal from './ProductModal';
 
 const Products = ({ loaded, products, addToCart, cartItems}) => {
@@ -130,14 +131,13 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
   } else {
     productData = products;
     return (
-      <div className="box-container">
         <Box
           display="flex"
           // flexwrap="nowrap"
           p={1}
           m={1}
           // bgcolor="background.paper"
-          css={{ maxWidth: 300 }}
+          // css={{ maxWidth: 300 }}
         >
           {productData.map((product) => {
             console.log(product);
@@ -154,6 +154,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
             return (
               <Box p={1} >
               <div className="cardContainer">
+
                 <Card
                   className={classes.root}
                   height={400}
@@ -162,6 +163,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
                     handleOpen();
                   }}
                 >
+
                 <Box p={1}>
                   <CardActionArea>
                     <CardMedia
@@ -202,7 +204,6 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
             );
           })}
         </Box>
-      </div>
     );
   }
 };

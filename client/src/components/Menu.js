@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 // import a11yProps from "./a11yProps";
-
+import Grid from '@material-ui/core/Grid';
 import Products from "./Products";
 import TabPanel from "./TabPanel";
 
@@ -77,13 +77,19 @@ function Menu(props) {
           </Tab>
         </Tabs>
       </AppBar>
-      <div className="productsContainer">
+      <div className="products-container">
+      <Grid container
+      spacing={0}
+      direction="row"
+      alignItems="center"
+      justify="center">
       <Products
               addToCart={props.addToCart}
               products={props.products}
               loaded={props.loaded}
               cartItems={props.cartItems}
             />
+      </Grid>
             </div>
     </div>
   );
