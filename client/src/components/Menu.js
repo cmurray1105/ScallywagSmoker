@@ -74,21 +74,17 @@ function Menu(props) {
             title="Gift Shop"
             label="Gift Shop"
           >
-             <Products
-              addToCart={props.addToCart}
-              products={props.products}
-              loaded={props.loaded}
-              cartItems={props.cartItems}
-            />
           </Tab>
         </Tabs>
       </AppBar>
+      <div className="productsContainer">
       <Products
               addToCart={props.addToCart}
               products={props.products}
               loaded={props.loaded}
               cartItems={props.cartItems}
             />
+            </div>
     </div>
   );
 }

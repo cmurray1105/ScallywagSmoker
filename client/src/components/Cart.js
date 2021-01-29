@@ -4,7 +4,9 @@ import Modal from '@material-ui/core/Modal';
 import CheckoutModal from './CheckoutModal'
 
 const Cart = (props) =>{
-  let priceString = props.total.toString();
+  const convertPriceToString = (price)=>{
+    console.log("func console", props.cartItems)
+  let priceString = price.toString();
   if (priceString.includes(".")) {
     if (priceString.split(".")[1].length === 1) {
       priceString += "0";
@@ -18,6 +20,10 @@ const Cart = (props) =>{
   } else {
     priceString += ".00";
   }
+  return priceString
+}
+let priceString = convertPriceToString(props.total)
+
   let itemMap = null;
   if (props.cartItems){
     console.log(Object.keys(props.cartItems), "item length")
@@ -25,23 +31,16 @@ const Cart = (props) =>{
     console.log("products", props.products, "selected Items", typeof selectedItems[0])
     itemMap = selectedItems.map((item)=>(
       <div>
-        {item}: $
+        {props.cartItems[item].quantity} X {item}: ${convertPriceToString(props.cartItems[item].price * props.cartItems[item].quantity)}
       </div>
     ))
   }
-//   React.useEffect(()=>{
-  // props.cartItems.forEach((item)=>{
-  //   console.log("cart item", item)
-
-//   })
-// })
   return(
   <div>
-  <CheckoutModal clearOrder={props.clearOrder} priceString={priceString} total={props.total} products={props.products} cartItems={props.cartItems}/>
-  Total Due:
-  ${priceString}
-  {itemMap}
 
+  {itemMap}
+  Total Due: ${priceString}
+  <CheckoutModal clearOrder={props.clearOrder} priceString={priceString} total={props.total} products={props.products} cartItems={props.cartItems}/>
 
   </div>
 

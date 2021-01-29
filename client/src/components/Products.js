@@ -26,16 +26,33 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
       width: 250,
       marginTop: 25,
       marginBottom: 25,
-      height: 400
+      height: 400,
+      outline: "none",
+      border: "none",
     },
     media: {
       height: 250,
       width: 250,
     },
   });
+  const useStylesModal = makeStyles((theme) => ({
+    paper: {
+      position: "absolute",
+      width: 400,
+      maxHeight: 800,
+      backgroundColor: theme.palette.background.paper,
+      border: "none",
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+      outline: "none",
+      top: "33%",
+      textAlign: "center",
+      left: "40%",
+    },
+  }));
 
   const classes = useStyles();
-
+  const ModalClasses = useStylesModal()
   const handleOpen = () => {
     setOpen(true);
   };
@@ -85,7 +102,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
   }
 
   const body = (
-    <div className="paper">
+    <div className={ModalClasses.paper}>
       <h2 id="simple-modal-title">{currentProduct.product_name}</h2>
       <div className="order-form">
       {currentQuantity < 5 ? <div>

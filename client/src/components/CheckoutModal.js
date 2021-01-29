@@ -1,6 +1,6 @@
 import React from "react";
 import Button from '@material-ui/core/Button';
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import DatePicker from "react-datepicker";
 import axios from "axios";
@@ -29,11 +29,31 @@ export default function CheckoutModal(props) {
       width: 400,
       maxHeight: 800,
       backgroundColor: theme.palette.background.paper,
-      border: "2px solid #000",
+      border: "none",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      outline: "none"
     },
   }));
+
+  const theme = createMuiTheme({
+    overrides: {
+      // Style sheet name ⚛️
+      MuiButton: {
+        // Name of the rule
+        text: {
+          // Some CSS
+          background: 'linear-gradient(45deg, rgb(112, 112, 112) 30%, rgb(198, 199, 199) 90%)',
+          borderRadius: 3,
+          border: 0,
+          color: 'white',
+          height: 48,
+          padding: '0 30px',
+          boxShadow: '0 3px 5px 2px  grey',
+        },
+      },
+    },
+  });
 
 
   const classes = useStyles();
@@ -187,7 +207,7 @@ export default function CheckoutModal(props) {
             {/* <br/> */}
           </label>
           <br />
-          <input type="submit" value="Submit" />
+          <Button type="submit" value="Submit">Submit</Button>
         </form>
       </div>
     </div>
@@ -195,10 +215,12 @@ export default function CheckoutModal(props) {
   console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
   return (
     <div>
-      <Button backgroundColor="grey" className="checkoutButton" onClick={handleOpen}>
+        <ThemeProvider theme={theme}>
+      <Button className="checkoutButton" onClick={handleOpen}>
       {/* <FontAwesomeIcon icon={["far", "coffee"]} /> */}
       Checkout
       </Button>
+      </ThemeProvider>
       <Modal
         open={open}
         onClose={handleClose}

@@ -78,7 +78,8 @@ cursor: pointer;
     /* width: 400; */
     /* height: 400; */
     background: white;
-    border: '2px solid #000';
+    /* border: '2px solid #000'; */
+    outline: 'none';
     box-shadow:grey;
     /* justify-items: center;
     align-items: center; */
@@ -91,7 +92,9 @@ cursor: pointer;
     /* display: flex; */
     /* align-items: center; */
     /* justify-content: center; */
+    border: "none";
     display: inline-block;
+    outline: 'none';
   }
   label {
     display: flex;
@@ -107,4 +110,11 @@ cursor: pointer;
   }
   .checkoutButton {
     /* margin-top: 300px; */
+    color: red;
+    background-color: rgb(112, 112, 112);
+  }
+
+  .products-container {
+    align-items: center;
+    justify-content: center;
   }
