@@ -7,90 +7,86 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 // import a11yProps from "./a11yProps";
-import Grid from '@material-ui/core/Grid';
+
 import Products from "./Products";
 import TabPanel from "./TabPanel";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    width: "100%",
-    // backgroundColor: theme.palette.background.paper,
-  },
-}));
+
+
 function Menu(props) {
+
   const [value, setValue] = React.useState(0);
+  const [hovered, setHovered] = React.useState(null)
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      // flexGrow: 1,
+      // width: "100%",
+      color: 'red',
+      backgroundColor: 'white'
+      // backgroundColor: theme.palette.background.paper,
+    },
+    hovered: {
+      color: 'white',
+      backgroundColor: 'red'
+    }
+  }));
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    props.getProducts(categories[newValue])
+    props.getProducts(categories[newValue]);
   };
+  const handleHover = (cat)=>{
+    console.log("CATEGORY", cat)
+    setHovered(cat)
+  }
+  const handleExit = ()=>{
+    setHovered('')
+  }
 
-  const categories = ['Meats', 'Sides', 'Combos', 'Dessert', 'Catering', 'Gift Shop']
+  const classes = useStyles()
+  const categories = [
+    "Meats",
+    "Sides",
+    "Combos",
+    "Dessert",
+    "Catering",
+    "Gift Shop",
+  ];
+  let mapTabs = (
+    categories.map((category)=>{
+      console.log(category)
+      return (
+      <Tab
+      onMouseEnter={()=>{handleHover(category)}}
+      onMouseLeave={() =>{handleExit()}}
+      className={hovered=== category ? classes.hovered : classes.paper}
+      label={category}>
+      </Tab>
+    )
+    })
+  )
   return (
-
-    <div>
+    <div >
       <AppBar position="static" color="default" centered>
         <Tabs
-          className="tab-content"
+         className="tab-content"
           value={value}
-          variant="scrollable"
+          // variant="scrollable"
           scrollButtons="auto"
           onChange={handleChange}
-
-
         >
-          <Tab className="menuTab" label="Meats">
-          </Tab>
-          <Tab
-            className="menuTab"
-            label="Sides"
-          >
-          </Tab>
-          <Tab
-            className="menuTab"
-            label="Combos"
-          >
-
-          </Tab>
-          <Tab
-            className="menuTab"
-            eventKey="Dessert"
-            title="Dessert"
-            label="Dessert"
-          >
-
-          </Tab>
-          <Tab
-            className="menuTab"
-            eventKey="Catering"
-            title="Catering"
-            label="Catering"
-          >
-
-          </Tab>
-          <Tab
-            className="menuTab"
-            eventKey="Gift Shop"
-            title="Gift Shop"
-            label="Gift Shop"
-          >
-          </Tab>
+          {mapTabs}
         </Tabs>
       </AppBar>
       <div className="products-container">
-      <Grid container
-      spacing={0}
-      direction="row"
-      alignItems="center"
-      justify="center">
-      <Products
-              addToCart={props.addToCart}
-              products={props.products}
-              loaded={props.loaded}
-              cartItems={props.cartItems}
-            />
-      </Grid>
-            </div>
+
+          <Products
+            addToCart={props.addToCart}
+            products={props.products}
+            loaded={props.loaded}
+            cartItems={props.cartItems}
+          />
+      </div>
     </div>
   );
 }

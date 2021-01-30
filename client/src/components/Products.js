@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Grid from "@material-ui/core/Grid";
+import Container from '@material-ui/core/Container';
 // import ProductModal from './ProductModal';
 
 const Products = ({ loaded, products, addToCart, cartItems}) => {
@@ -153,7 +154,8 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
 
             return (
               <Box p={1} >
-              <div className="cardContainer">
+              <Container
+              >
 
                 <Card
                   className={classes.root}
@@ -199,7 +201,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
                 >
                   {body}
                 </Modal>
-              </div>
+                </Container>
               </Box>
             );
           })}

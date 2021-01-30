@@ -43,7 +43,8 @@ export default function CheckoutModal(props) {
         // Name of the rule
         text: {
           // Some CSS
-          background: 'linear-gradient(45deg, rgb(112, 112, 112) 30%, rgb(198, 199, 199) 90%)',
+          background: 'linear-gradient(45deg, rgb(204, 146, 146) 30%, rgb(241, 210, 210) 90%)',
+          fontWeight : 'bold',
           borderRadius: 3,
           border: 0,
           color: 'white',
