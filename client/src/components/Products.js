@@ -120,10 +120,11 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
     );
     event.preventDefault();
     console.log("currentProduct", currentProduct);
-    if (selectedQuantity > 0) {
-      if (currentQuantity - selectedQuantity < 0) {
-        alert(`Please select another quantity. Only ${currentQuantity} left!`);
-      } else {
+    // console.log("quantitty", typeof quantity)
+    if (quantity==='0'){
+      alert('Please select a quantity greater than zero')
+    } else {
+
         addToCart({
           productName: currentProduct.product_name,
           quantity: parseInt(quantity),
@@ -133,7 +134,7 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
         });
         // getProducts(currentProduct.category)
         handleClose();
-      }
+
     }
   };
   let createPullDown = () => {
