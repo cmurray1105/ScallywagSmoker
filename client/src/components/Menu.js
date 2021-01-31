@@ -23,7 +23,8 @@ function Menu(props) {
       // flexGrow: 1,
       // width: "100%",
       color: 'red',
-      backgroundColor:  'rgb(245, 245, 245)'
+      // backgroundColor:  'rgb(245, 245, 245)'
+      backgroundColor: 'white'
       // backgroundColor: theme.palette.background.paper,
     },
     hovered: {
@@ -78,7 +79,7 @@ function Menu(props) {
 
   return (
     <div >
-      <AppBar position="static" color="default" centered>
+      {/* <AppBar position="static" color="default" centered> */}
         <Tabs
          className="tab-content"
           value={value}
@@ -89,7 +90,7 @@ function Menu(props) {
         >
           {mapTabs}
         </Tabs>
-      </AppBar>
+      {/* </AppBar> */}
       <div className="products-container">
 
           <Products

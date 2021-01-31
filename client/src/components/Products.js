@@ -22,7 +22,7 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
   const [customerName, handleNameChange] = React.useState("");
   const [currentProduct, setProduct] = React.useState({});
   const matches = useMediaQuery("(min-width:600px)");
-  const [currentCard, setCurrentCard] = React.useState('');
+  const [currentCard, setCurrentCard] = React.useState("");
 
   console.log("T/F?", !cartItems);
   let selectedQuantity = 0;
@@ -60,7 +60,8 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
       outline: "none",
       top: "33%",
       textAlign: "center",
-      left: "40%"
+      left: "40%",
+      borderRadius: "5%",
     },
     form: {
       display: "inline-block",
@@ -103,18 +104,20 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
     );
     event.preventDefault();
     console.log("currentProduct", currentProduct);
-    if (currentQuantity - selectedQuantity < 0) {
-      alert(`Please select another quantity. Only ${currentQuantity} left!`);
-    } else {
-      addToCart({
-        productName: currentProduct.product_name,
-        quantity: parseInt(quantity),
-        price: currentProduct.price,
-        id: currentProduct.id,
-        originalQuantity: currentProduct.quantity,
-      });
-      // getProducts(currentProduct.category)
-      handleClose();
+    if (selectedQuantity > 0) {
+      if (currentQuantity - selectedQuantity < 0) {
+        alert(`Please select another quantity. Only ${currentQuantity} left!`);
+      } else {
+        addToCart({
+          productName: currentProduct.product_name,
+          quantity: parseInt(quantity),
+          price: currentProduct.price,
+          id: currentProduct.id,
+          originalQuantity: currentProduct.quantity,
+        });
+        // getProducts(currentProduct.category)
+        handleClose();
+      }
     }
   };
   let createPullDown = () => {
@@ -174,56 +177,57 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
           }
 
           return (
-
-              <Container gridArea>
-                <Card
-                onMouseOver = {() =>{setCurrentCard(product.product_name) }}
-                onMouseOut = {() =>{setCurrentCard('') }}
+            <Container gridArea>
+              <Card
+                onMouseOver={() => {
+                  setCurrentCard(product.product_name);
+                }}
+                onMouseOut={() => {
+                  setCurrentCard("");
+                }}
                 raised={currentCard === product.product_name ? true : false}
                 className={classes.root}
                 // height={400}
                 onClick={() => {
                   setProduct(product);
                   handleOpen();
-                  }}
-                  centered
-                >
+                }}
+                centered
+              >
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image={product.image_url}
+                    title={product.product_name}
+                    // height={200px}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {product.product_name}
+                    </Typography>
+                    {/* <ProductModal product={product} addToCart={addToCart}/> */}
 
-                    <CardActionArea>
-                      <CardMedia
-                        className={classes.media}
-                        image={product.image_url}
-                        title={product.product_name}
-                        // height={200px}
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {product.product_name}
-                        </Typography>
-                        {/* <ProductModal product={product} addToCart={addToCart}/> */}
-
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          component="p"
-                        >
-                          ${priceString}
-                          {/* <img className='card-image' src={product.image_url} /> */}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                    <CardActions></CardActions>
-
-                </Card>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                  {body}
-                </Modal>
-              </Container>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      ${priceString}
+                      {/* <img className='card-image' src={product.image_url} /> */}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions></CardActions>
+              </Card>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+              >
+                {body}
+              </Modal>
+            </Container>
           );
         })}
       </Box>
