@@ -158,9 +158,11 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
     return (
       <Box
         display="flex"
-        // flexwrap="nowrap"
+        flexWrap="nowrap"
+        alignContent="flex-start"
         p={1}
         m={1}
+
         // bgcolor="background.paper"
         // css={{ maxWidth: 300 }}
       >
