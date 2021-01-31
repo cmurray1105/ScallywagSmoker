@@ -91,7 +91,7 @@ function Menu(props) {
           {mapTabs}
         </Tabs>
       {/* </AppBar> */}
-      <div className="products-container">
+      {/* <div className="products-container"> */}
 
           <Products
             addToCart={props.addToCart}
@@ -99,7 +99,7 @@ function Menu(props) {
             loaded={props.loaded}
             cartItems={props.cartItems}
           />
-      </div>
+      {/* </div> */}
     </div>
   );
 }

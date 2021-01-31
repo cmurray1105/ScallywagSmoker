@@ -36,7 +36,7 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
       height: 400,
       outline: "none",
       border: "none",
-      alignItems: "center",
+      // alignItems: "center",
     },
     media: {
       height: 250,
@@ -47,6 +47,21 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
       height: "auto",
       borderRadius: "10%",
     },
+    productBox: {
+      display: "flex",
+      flexFlow: "row wrap",
+      padding: "8px",
+      margin: "8px"
+    },
+    cardContainer: {
+      display: "block",
+      boxSizing: "border-box",
+      marginLeft:"auto",
+      marginRight:"auto",
+      paddingLeft: "16px",
+      paddingRight:"16px"
+    }
+
   });
   const useStylesModal = makeStyles((theme) => ({
     paper: {
@@ -70,6 +85,7 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
       marginLeft: "auto",
       marginRight: "auto",
     },
+    // productBox
   }));
 
   const classes = useStyles();
@@ -157,12 +173,11 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
     productData = products;
     return (
       <Box
+      className={classes.productBox}
         display="flex"
-        flexWrap="nowrap"
-        alignContent="flex-start"
+        // flexwrap="nowrap"
         p={1}
         m={1}
-
         // bgcolor="background.paper"
         // css={{ maxWidth: 300 }}
       >
@@ -179,7 +194,7 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
           }
 
           return (
-            <Container gridArea>
+            <div className={classes.cardContainer}>
               <Card
                 onMouseOver={() => {
                   setCurrentCard(product.product_name);
@@ -229,7 +244,7 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
               >
                 {body}
               </Modal>
-            </Container>
+            </div>
           );
         })}
       </Box>
