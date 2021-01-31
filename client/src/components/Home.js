@@ -14,15 +14,29 @@ class Home extends Component {
       loaded: false,
       total: 0,
       cart: {},
+      categories: []
       // productIds: [],
     };
     this.getProducts = this.getProducts.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.clearOrder = this.clearOrder.bind(this);
+    this.getCategories = this.getCategories.bind(this)
     // this.categorySelected = this.categorySelected.bind(this)
   }
   componentDidMount() {
     this.getProducts("meats");
+    this.getCategories();
+  }
+  getCategories = () =>{
+    Axios.get('/categories')
+    .then((result)=>{
+      console.log("CATEGORIES", result.data)
+      let cats = []
+      for (let i = 0; i < result.data.length; i++){
+        cats.push(result.data[i].name)
+      }
+      this.setState({categories:cats})
+    })
   }
   getProducts(category) {
     Axios.get("/products", {
@@ -79,6 +93,7 @@ class Home extends Component {
               products={this.state.products}
               loaded={this.state.loaded}
               cartItems={this.state.cart}
+              categories={this.state.categories}
             />
           </div>
           <div className="bbqList">

@@ -7,7 +7,7 @@ USE ebdb;
 CREATE TABLE product (
   id INT PRIMARY KEY AUTO_INCREMENT,
   product_name VARCHAR(255),
-  category VARCHAR(255),
+  categoryId INT,
   quantity INT,
   image_url VARCHAR(255) NOT NULL,
   price DECIMAL(10,2) NOT NULL

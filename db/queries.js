@@ -69,5 +69,14 @@ const updateQuantity = (params, cb)=>{
     }
 })
 }
+const getCategories = (cb)=>{
+  connection.query('SELECT * FROM categories', (err, result)=>{
+    if (err) {
+      cb(err, null)
+    } else {
+      cb(null, result)
+    }
+  })
+}
 
-module.exports ={getProducts, getOrders, addDelivery, addItemToOrder, updateQuantity}
+module.exports ={getProducts, getOrders, addDelivery, addItemToOrder, updateQuantity, getCategories}

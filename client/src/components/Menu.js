@@ -6,23 +6,24 @@ import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-// import a11yProps from "./a11yProps";
-
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Products from "./Products";
-import TabPanel from "./TabPanel";
+import axios from 'axios'
 
 
 
 function Menu(props) {
-
+  const matches = useMediaQuery('(min-width:800px)');
   const [value, setValue] = React.useState(0);
   const [hovered, setHovered] = React.useState(null)
+  const [currentVariant, setVariant] = React.useState('none');
+  console.log("PROPPPP", props)
   const useStyles = makeStyles((theme) => ({
     paper: {
       // flexGrow: 1,
       // width: "100%",
       color: 'red',
-      backgroundColor: 'white'
+      backgroundColor:  'rgb(245, 245, 245)'
       // backgroundColor: theme.palette.background.paper,
     },
     hovered: {
@@ -33,7 +34,7 @@ function Menu(props) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    props.getProducts(categories[newValue]);
+    props.getProducts(props.categories[newValue]);
   };
   const handleHover = (cat)=>{
     console.log("CATEGORY", cat)
@@ -43,17 +44,21 @@ function Menu(props) {
     setHovered('')
   }
 
+
+  // React.useEffect(()=>{
+  // getCategories()})
+
   const classes = useStyles()
-  const categories = [
-    "Meats",
-    "Sides",
-    "Combos",
-    "Dessert",
-    "Catering",
-    "Gift Shop",
-  ];
+  // const categories = [
+  //   "Meats",
+  //   "Sides",
+  //   "Combos",
+  //   "Dessert",
+  //   "Catering",
+  //   "Gift Shop",
+  // ];
   let mapTabs = (
-    categories.map((category)=>{
+    props.categories.map((category)=>{
       console.log(category)
       return (
       <Tab
@@ -65,15 +70,22 @@ function Menu(props) {
     )
     })
   )
+
+  // if (!matches){
+  //   setVariant('scrollable')
+  //   // console.log(matches)
+  // }
+
   return (
     <div >
       <AppBar position="static" color="default" centered>
         <Tabs
          className="tab-content"
           value={value}
-          // variant="scrollable"
+          variant={currentVariant}
           scrollButtons="auto"
           onChange={handleChange}
+          centered
         >
           {mapTabs}
         </Tabs>

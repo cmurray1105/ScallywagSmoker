@@ -9,19 +9,24 @@ import { Modal } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Grid from "@material-ui/core/Grid";
-import Container from '@material-ui/core/Container';
+import Container from "@material-ui/core/Container";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 // import ProductModal from './ProductModal';
 
-const Products = ({ loaded, products, addToCart, cartItems}) => {
+const Products = ({ loaded, products, addToCart, cartItems }) => {
   const [open, setOpen] = React.useState(false);
   const [quantity, handleChange] = React.useState("0");
   const [customerName, handleNameChange] = React.useState("");
   const [currentProduct, setProduct] = React.useState({});
-  console.log("T/F?", !cartItems)
-  let selectedQuantity = 0
-  let currentQuantity = currentProduct.quantity
+  const matches = useMediaQuery("(min-width:600px)");
+  const [currentCard, setCurrentCard] = React.useState('');
+
+  console.log("T/F?", !cartItems);
+  let selectedQuantity = 0;
+  let currentQuantity = currentProduct.quantity;
 
   const useStyles = makeStyles({
     root: {
@@ -31,10 +36,16 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
       height: 400,
       outline: "none",
       border: "none",
+      alignItems: "center",
     },
     media: {
       height: 250,
       width: 250,
+    },
+    formMedia: {
+      width: "100%",
+      height: "auto",
+      borderRadius: "10%",
     },
   });
   const useStylesModal = makeStyles((theme) => ({
@@ -49,12 +60,19 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
       outline: "none",
       top: "33%",
       textAlign: "center",
+      left: "40%"
+    },
+    form: {
+      display: "inline-block",
+      textAlign: "center",
       left: "40%",
+      marginLeft: "auto",
+      marginRight: "auto",
     },
   }));
 
   const classes = useStyles();
-  const ModalClasses = useStylesModal()
+  const ModalClasses = useStylesModal();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -63,55 +81,58 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
     setOpen(false);
   };
 
-  if(cartItems[currentProduct.product_name]){
-    selectedQuantity = cartItems[currentProduct.product_name].quantity
-     currentQuantity = currentProduct.quantity - selectedQuantity
+  if (cartItems[currentProduct.product_name]) {
+    selectedQuantity = cartItems[currentProduct.product_name].quantity;
+    currentQuantity = currentProduct.quantity - selectedQuantity;
   }
 
   // if(cartItems.length > 0){
   //   if(cartItems[currentProduct.product_name]){
   //     console.log("CI AND STUFF", cartItems[currentProduct.product_name])
-    // }
+  // }
   // } else {
-    // console.log("nope", currentProduct)
+  // console.log("nope", currentProduct)
   // }
 
   const handleSubmit = (event) => {
-    console.log("currentQuantity", currentQuantity, "selectedQuantity", selectedQuantity)
+    console.log(
+      "currentQuantity",
+      currentQuantity,
+      "selectedQuantity",
+      selectedQuantity
+    );
     event.preventDefault();
-    console.log("currentProduct.quantity", currentProduct.quantity, "selectedQuantity", selectedQuantity)
-    if ((currentQuantity - selectedQuantity) < 0){
-
-      alert(`Please select another quantity. Only ${currentQuantity} left!`)
+    console.log("currentProduct", currentProduct);
+    if (currentQuantity - selectedQuantity < 0) {
+      alert(`Please select another quantity. Only ${currentQuantity} left!`);
     } else {
-    addToCart({
-      productName: currentProduct.product_name,
-      quantity: parseInt(quantity),
-      price: currentProduct.price,
-      id: currentProduct.id,
-      originalQuantity: currentProduct.quantity
-    });
-    // getProducts(currentProduct.category)
-    handleClose();
-  }
-}
+      addToCart({
+        productName: currentProduct.product_name,
+        quantity: parseInt(quantity),
+        price: currentProduct.price,
+        id: currentProduct.id,
+        originalQuantity: currentProduct.quantity,
+      });
+      // getProducts(currentProduct.category)
+      handleClose();
+    }
+  };
   let createPullDown = () => {
-      let items = [];
-      for (let i = 0; i <= currentQuantity; i++) {
-           items.push(<option value={i}>{i}</option>);
-      }
-      return items;
-  }
+    let items = [];
+    for (let i = 0; i <= currentQuantity; i++) {
+      items.push(<option value={i}>{i}</option>);
+    }
+    return items;
+  };
 
   const body = (
     <div className={ModalClasses.paper}>
+      <img className={classes.formMedia} src={currentProduct.image_url} />
       <h2 id="simple-modal-title">{currentProduct.product_name}</h2>
+      <h3>{currentProduct.price}</h3>
       <div className="order-form">
-      {currentQuantity < 5 ? <div>
-          Only {currentQuantity} left
-        </div> : null}
-        <form onSubmit={handleSubmit}>
-
+        {currentQuantity < 5 ? <div>Only {currentQuantity} left</div> : null}
+        <form className={ModalClasses.form} onSubmit={handleSubmit}>
           <label>
             Quantity:
             <select onChange={(e) => handleChange(e.target.value)}>
@@ -119,7 +140,7 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
             </select>
           </label>
           <Button type="submit">
-          <AddShoppingCartIcon />
+            <AddShoppingCartIcon />
           </Button>
         </form>
       </div>
@@ -132,66 +153,67 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
   } else {
     productData = products;
     return (
-        <Box
-          display="flex"
-          // flexwrap="nowrap"
-          p={1}
-          m={1}
-          // bgcolor="background.paper"
-          // css={{ maxWidth: 300 }}
-        >
-          {productData.map((product) => {
-            console.log(product);
-            let priceString = product.price.toString();
-            console.log(priceString.length);
-            if (priceString.includes(".")) {
-              if (priceString.split(".")[1].length === 1) {
-                priceString += "0";
-              }
-            } else {
-              priceString += ".00";
+      <Box
+        display="flex"
+        // flexwrap="nowrap"
+        p={1}
+        m={1}
+        // bgcolor="background.paper"
+        // css={{ maxWidth: 300 }}
+      >
+        {productData.map((product) => {
+          console.log(product);
+          let priceString = product.price.toString();
+          console.log(priceString.length);
+          if (priceString.includes(".")) {
+            if (priceString.split(".")[1].length === 1) {
+              priceString += "0";
             }
+          } else {
+            priceString += ".00";
+          }
 
-            return (
-              <Box p={1} >
-              <Container
-              >
+          return (
 
+              <Container gridArea>
                 <Card
-                  className={classes.root}
-                  height={400}
-                  onClick={() => {
-                    setProduct(product);
-                    handleOpen();
+                onMouseOver = {() =>{setCurrentCard(product.product_name) }}
+                onMouseOut = {() =>{setCurrentCard('') }}
+                raised={currentCard === product.product_name ? true : false}
+                className={classes.root}
+                // height={400}
+                onClick={() => {
+                  setProduct(product);
+                  handleOpen();
                   }}
+                  centered
                 >
 
-                <Box p={1}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-                      image={product.image_url}
-                      title={product.product_name}
-                      // height={200px}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {product.product_name}
-                      </Typography>
-                      {/* <ProductModal product={product} addToCart={addToCart}/> */}
+                    <CardActionArea>
+                      <CardMedia
+                        className={classes.media}
+                        image={product.image_url}
+                        title={product.product_name}
+                        // height={200px}
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {product.product_name}
+                        </Typography>
+                        {/* <ProductModal product={product} addToCart={addToCart}/> */}
 
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        ${priceString}
-                        {/* <img className='card-image' src={product.image_url} /> */}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions></CardActions>
-                  </Box>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          ${priceString}
+                          {/* <img className='card-image' src={product.image_url} /> */}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    <CardActions></CardActions>
+
                 </Card>
                 <Modal
                   open={open}
@@ -201,11 +223,10 @@ const Products = ({ loaded, products, addToCart, cartItems}) => {
                 >
                   {body}
                 </Modal>
-                </Container>
-              </Box>
-            );
-          })}
-        </Box>
+              </Container>
+          );
+        })}
+      </Box>
     );
   }
 };

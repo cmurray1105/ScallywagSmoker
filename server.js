@@ -122,6 +122,16 @@ app.get("/getOrders", (req, res) => {
     }
   });
 });
+app.get("/categories", (req, res)=>{
+  db.getCategories((err, result)=>{
+    if (err){
+      console.log(err)
+    } else {
+    console.log("categories", result)
+    res.send(result)
+    }
+  })
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening at port ${PORT}. cwm`);

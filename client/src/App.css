@@ -111,3 +111,6 @@ cursor: pointer;
   .price {
     padding: 400px;
   }
+  .modal-image {
+    border-radius: 50%;
+  }

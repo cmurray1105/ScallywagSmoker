@@ -116,6 +116,16 @@ app.get("/getOrders", function (req, res) {
     }
   });
 });
+app.get("/categories", function (req, res) {
+  db.getCategories(function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("categories", result);
+      res.send(result);
+    }
+  });
+});
 app.listen(PORT, function () {
   console.log("Server listening at port ".concat(PORT, ". cwm"));
 });
