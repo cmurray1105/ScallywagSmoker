@@ -16,7 +16,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // import ProductModal from './ProductModal';
 
-const Products = ({ loaded, products, addToCart, cartItems }) => {
+const Products = ({ loaded, products, addToCart, cartItems, convertPriceToString}) => {
   const [open, setOpen] = React.useState(false);
   const [quantity, handleChange] = React.useState("0");
   const [customerName, handleNameChange] = React.useState("");
@@ -36,6 +36,7 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
       height: 400,
       outline: "none",
       border: "none",
+      float: 'left',
       // alignItems: "center",
     },
     media: {
@@ -73,9 +74,12 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
       outline: "none",
-      top: "33%",
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      margin: '0 auto',
+      display: 'table',
       textAlign: "center",
-      left: "40%",
       borderRadius: "5%",
     },
     form: {
@@ -102,14 +106,6 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
     selectedQuantity = cartItems[currentProduct.product_name].quantity;
     currentQuantity = currentProduct.quantity - selectedQuantity;
   }
-
-  // if(cartItems.length > 0){
-  //   if(cartItems[currentProduct.product_name]){
-  //     console.log("CI AND STUFF", cartItems[currentProduct.product_name])
-  // }
-  // } else {
-  // console.log("nope", currentProduct)
-  // }
 
   const handleSubmit = (event) => {
     console.log(
@@ -147,9 +143,10 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
 
   const body = (
     <div className={ModalClasses.paper}>
+    {console.log("ASJIFJIJDSF",  currentProduct.price)}
       <img className={classes.formMedia} src={currentProduct.image_url} />
       <h2 id="simple-modal-title">{currentProduct.product_name}</h2>
-      <h3>{currentProduct.price}</h3>
+      <h3>${convertPriceToString(parseInt(currentProduct.price))}</h3>
       <div className="order-form">
         {currentQuantity < 5 ? <div>Only {currentQuantity} left</div> : null}
         <form className={ModalClasses.form} onSubmit={handleSubmit}>
@@ -183,12 +180,14 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
         // css={{ maxWidth: 300 }}
       >
         {productData.map((product) => {
-          console.log(product);
+          console.log("ZZZZZZZZZ", product);
           let priceString = product.price.toString();
           console.log(priceString.length);
           if (priceString.includes(".")) {
             if (priceString.split(".")[1].length === 1) {
+              console.log("NEW STRING", priceString)
               priceString += "0";
+              console.log("STRING AGAIN", priceString)
             }
           } else {
             priceString += ".00";
@@ -210,7 +209,7 @@ const Products = ({ loaded, products, addToCart, cartItems }) => {
                   setProduct(product);
                   handleOpen();
                 }}
-                centered
+
               >
                 <CardActionArea>
                   <CardMedia

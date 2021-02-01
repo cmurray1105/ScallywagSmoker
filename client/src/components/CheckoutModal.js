@@ -32,7 +32,11 @@ export default function CheckoutModal(props) {
       border: "none",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
-      outline: "none"
+      outline: "none",
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      borderRadius: '5%'
     },
   }));
 
@@ -52,6 +56,7 @@ export default function CheckoutModal(props) {
           padding: '0 30px',
           boxShadow: '0 3px 5px 2px  grey',
         },
+
       },
     },
   });

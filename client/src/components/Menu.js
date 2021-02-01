@@ -20,6 +20,7 @@ function Menu(props) {
   console.log("PROPPPP", props)
   const useStyles = makeStyles((theme) => ({
     paper: {
+      justifyContent: "center",
       // flexGrow: 1,
       // width: "100%",
       color: 'red',
@@ -30,6 +31,9 @@ function Menu(props) {
     hovered: {
       color: 'white',
       backgroundColor: 'red'
+    },
+    scroller: {
+      flexGrow: "0"
     }
   }));
 
@@ -81,9 +85,10 @@ function Menu(props) {
     <div >
       {/* <AppBar position="static" color="default" centered> */}
         <Tabs
-         className="tab-content"
+        classes={{root: classes.paper, scroller: classes.scroller}}
+        //  className="tab-content"
           value={value}
-          variant={currentVariant}
+          variant={"scrollable"}
           scrollButtons="auto"
           onChange={handleChange}
           centered
@@ -94,6 +99,7 @@ function Menu(props) {
       {/* <div className="products-container"> */}
 
           <Products
+            convertPriceToString={props.convertPriceToString}
             addToCart={props.addToCart}
             products={props.products}
             loaded={props.loaded}
