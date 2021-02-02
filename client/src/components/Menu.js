@@ -1,15 +1,14 @@
 // import { Tabs, Tab } from "react-bootstrap-tabs";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+// import Typography from "@material-ui/core/Typography";
+// import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
+// import AppBar from "@material-ui/core/AppBar";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Products from "./Products";
-import axios from 'axios'
-
+import CheckoutModal from './CheckoutModal'
 
 
 function Menu(props) {

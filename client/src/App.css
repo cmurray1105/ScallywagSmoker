@@ -9,16 +9,16 @@
   top: 0;
   width: 100%;
   height:40px;
-  background-color: green;
+  background-color: white;
   margin-bottom: 50px;
-  z-index: 2;
+  z-index: 1;
 }
 .container {
   display: grid;
   grid-template-columns:
  1fr 1fr 1fr 1fr;
 grid-template-rows:
-  1fr 3fr;
+  1fr 1fr 1f 1fr;
 grid-template-areas:
   "head head head head"
   "blank body body list"
@@ -126,3 +126,35 @@ cursor: pointer;
   .modal-image {
     border-radius: 50%;
   }
+  /* .arrow {
+    overflow: hidden;
+    position: absolute;
+    font-size: 7px;
+    width: 3em;
+    height: 3em;
+
+  }
+    .arrow::before {
+      content: '';
+      margin: auto;
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-shadow: theme.shadows[1];
+      transform: rotate(45deg);
+    } */
+    .wrapper {
+      /* grid-template-columns: 'auto'; */
+      grid-template-columns: '3fr 1fr';
+      grid-template-rows: '1fr 1fr 1fr';
+      grid-template-areas: 'side list side' 'side checkout side'
+
+    }
+    .cartContainer {
+      background-color:rgb(204, 146, 146);
+      grid-area: 'list';
+    }
+    .checkoutArea {
+      background-color: purple;
+      grid-area: 'checkout';
+    }

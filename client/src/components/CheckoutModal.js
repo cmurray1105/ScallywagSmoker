@@ -47,14 +47,19 @@ export default function CheckoutModal(props) {
         // Name of the rule
         text: {
           // Some CSS
-          background: 'linear-gradient(45deg, rgb(204, 146, 146) 30%, rgb(241, 210, 210) 90%)',
+          background: 'white',
           fontWeight : 'bold',
           borderRadius: 3,
           border: 0,
-          color: 'white',
+          color: 'red',
           height: 48,
           padding: '0 30px',
           boxShadow: '0 3px 5px 2px  grey',
+          display: 'block',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          bottom: 0
+
         },
 
       },

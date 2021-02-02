@@ -41,7 +41,7 @@ let priceString = props.convertPriceToString(props.total)
   {itemMap}
 
   Total Due: ${priceString}
-  <CheckoutModal clearOrder={props.clearOrder} priceString={priceString} total={props.total} products={props.products} cartItems={props.cartItems}/>
+  {/* <CheckoutModal clearOrder={props.clearOrder} priceString={priceString} total={props.total} products={props.products} cartItems={props.cartItems}/> */}
   </div>
 
   )
