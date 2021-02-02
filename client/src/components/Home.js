@@ -98,7 +98,12 @@ class Home extends Component {
       <div>
         <div className="container">
           <div className="fixed-header">
-            <Navbar />
+            <Navbar
+              clearOrder={this.clearOrder}
+              total={this.state.total}
+              products={this.state.products}
+              cartItems={this.state.cart}
+              convertPriceToString={this.convertPriceToString}/>
           </div>
           <div className="header">
             <Banner />

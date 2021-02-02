@@ -24,29 +24,31 @@ function Navbar (props) {
       padding: theme.spacing(1),
       backgroundColor: theme.palette.background.paper,
       zIndex: 3,
-      height: '333.3px',
+      height: '400px',
       width: '400px',
-      borderRadius: '5%',
+      borderRadius: '6px',
       margin:'auto',
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr',
       gridTemplateRows: '4fr 1fr',
       gridTemplateAreas: " 'side list side'  'side checkout side"
     },
+    buttonContainer:{
+      textAlign: 'center',
+      float: 'right',
+      marginRight:'15px',
+    },
     button: {
       height: '38px',
       width:'38px',
-      float: 'right',
-      marginRight:'15px',
       // background: 'white',
       // fontWeight : 'bold',
       borderRadius: 2,
       // border: 0,
       color: 'red',
-      padding: '0 30px',
       boxShadow: '0 3px 5px 2px  grey',
-      textAlign: 'center'
-      // display: 'block',
+      textAlign: 'center',
+      display: 'inline-block',
       // marginLeft: 'auto',
       // marginRight: 'auto',
     },
@@ -95,9 +97,11 @@ function Navbar (props) {
     //       anchorEl={anchorEl}
     //     >
     <div >
+    <div className={classes.buttonContainer}>
                   <button className={classes.button} onClick={handleClick}>
                   Cart
                 </button>
+                </div>
                     <CartPopper
                   placement="top"
                   open={open}
@@ -126,7 +130,7 @@ function Navbar (props) {
                   LIST
                   </div>
                   <div className="checkoutArea">
-                    <CheckoutModal />
+                    <CheckoutModal clearOrder={props.clearOrder} total={props.total} products={props.products} cartItems={props.cartItems} />
                   {/* </div> */}
 </div>
                   </div>

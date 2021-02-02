@@ -79,6 +79,7 @@ export default function CheckoutModal(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("SUBMIT BEING HANDLED AND STUFF")
     axios
 .post("/addOrder", {
         address: streetAddress,
