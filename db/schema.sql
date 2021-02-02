@@ -10,8 +10,14 @@ CREATE TABLE product (
   categoryId INT,
   quantity INT,
   image_url VARCHAR(255) NOT NULL,
-  price DECIMAL(10,2) NOT NULL
+  price DECIMAL(10,2) NOT NULL,
+
+  CONSTRAINT `fk_catId_product`
+    FOREIGN KEY (categoryID)
+    REFERENCES category(id)
+    );
 );
+
 
 CREATE TABLE orders (
 id INT PRIMARY KEY AUTO_INCREMENT,

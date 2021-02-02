@@ -2,21 +2,30 @@ import { makeStyles } from "@material-ui/core/styles";
 // import Popper from '@material-ui/core/popper';
 import React, {ReactElement} from "react";
 import TableChartIcon from "@material-ui/icons/TableChart";
-import {
-  Button,
-  IconButton,
-  Container,
-  CssBaseline,
-  FormControlLabel,
-  Switch
-} from "@material-ui/core";
+import { ClickAwayListener } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 // import "./styles.css";
 import CartPopper from './CartPopper';
 import CheckoutModal from './CheckoutModal'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 function Navbar (props) {
   const [open, setOpen] = React.useState(false);
+  const [background, setBackground]= React.useState('white');
+  const [textColor, setTextColor] = React.useState('red')
+
+  const handleEnter = ()=>{
+    setBackground('red')
+    setTextColor('white')
+  }
+  const handleExit = ()=>{
+    setBackground('white')
+    setTextColor('red')
+  }
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+
   const useStyles = makeStyles((theme) => ({
     paper: {
       border: "none",
@@ -35,18 +44,19 @@ function Navbar (props) {
     },
     buttonContainer:{
       textAlign: 'center',
-      float: 'right',
-      marginRight:'15px',
+      // float: 'right',
+      marginLeft:'87%'
+      // marginRight:'25%',
     },
     button: {
       height: '38px',
       width:'38px',
-      // background: 'white',
+      background: background,
       // fontWeight : 'bold',
-      borderRadius: 2,
-      // border: 0,
-      color: 'red',
-      boxShadow: '0 3px 5px 2px  grey',
+      // borderRadius: 2,
+      border: 'none',
+      color: textColor,
+      // boxShadow: '0 3px 5px 2px  grey',
       textAlign: 'center',
       display: 'inline-block',
       // marginLeft: 'auto',
@@ -66,21 +76,7 @@ function Navbar (props) {
   const classes = useStyles();
   const [anchorEl, handleAnchor] = React.useState(null);
   const [arrowRef, handleArrowRef] = React.useState(null)
-  // const handleClick = (event)=>{
-  //   setAnchorEl(event.currentTarget)
-  //   setOpen(!open)
-  // }
-  // const [anchorEl, setAnchor] = React.useState(null)
-  // const handleClick = (event) => {
-  //   setAnchorEl(anchorEl ? null : event.currentTarget);
-  // };
-  // const open = Boolean(anchorEl);
-  // const id = open ? 'simple-popper' : undefined;
-  // const content = (
-  //   <div>
-  //     Popper Content and stuff
-  //   </div>
-  // )
+
   const handleClick = (event) => {
     handleAnchor(anchorEl ? null : event.currentTarget);
     setOpen(!open)
@@ -96,10 +92,17 @@ function Navbar (props) {
     //       arrow={true}
     //       anchorEl={anchorEl}
     //     >
+    <ClickAwayListener onClickAway={handleClickAway}>
     <div >
     <div className={classes.buttonContainer}>
-                  <button className={classes.button} onClick={handleClick}>
-                  Cart
+                  <button
+                  className={classes.button}
+                  onClick={handleClick}
+                  onMouseEnter={handleEnter}
+                  onMouseLeave={handleExit}
+                  >
+                  <FontAwesomeIcon icon={faShoppingCart} size='2x'/>
+                  {}
                 </button>
                 </div>
                     <CartPopper
@@ -136,6 +139,7 @@ function Navbar (props) {
                   </div>
                 </CartPopper>
     </div>
+                </ClickAwayListener>
   )
 }
 export default Navbar;

@@ -31,6 +31,7 @@ class Home extends Component {
   }
   convertPriceToString = (price) => {
     let priceString = price.toString();
+    console.log("First String", priceString)
     if (priceString.includes(".")) {
       if (priceString.split(".")[1].length === 1) {
         console.log("NEW STRING", priceString);

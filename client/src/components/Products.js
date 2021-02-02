@@ -146,7 +146,8 @@ const Products = ({ loaded, products, addToCart, cartItems, convertPriceToString
     {console.log("ASJIFJIJDSF",  currentProduct.price)}
       <img className={classes.formMedia} src={currentProduct.image_url} />
       <h2 id="simple-modal-title">{currentProduct.product_name}</h2>
-      <h3>${convertPriceToString(parseInt(currentProduct.price))}</h3>
+      {console.log("CCCCCCCCCCCCCCCCC",  currentProduct.price)}
+      <h3>${currentProduct.price}</h3>
       <div className="order-form">
         {currentQuantity < 5 ? <div>Only {currentQuantity} left</div> : null}
         <form className={ModalClasses.form} onSubmit={handleSubmit}>
@@ -181,7 +182,7 @@ const Products = ({ loaded, products, addToCart, cartItems, convertPriceToString
       >
         {productData.map((product) => {
           console.log("ZZZZZZZZZ", product);
-          let priceString = product.price.toString();
+          {/* let priceString = product.price.toString();
           console.log(priceString.length);
           if (priceString.includes(".")) {
             if (priceString.split(".")[1].length === 1) {
@@ -191,8 +192,10 @@ const Products = ({ loaded, products, addToCart, cartItems, convertPriceToString
             }
           } else {
             priceString += ".00";
-          }
-
+          } */}
+          console.log("PROD PRICE", product.price)
+          let priceString = convertPriceToString(product.price)
+          console.log("PS", priceString)
           return (
             <div className={classes.cardContainer}>
               <Card
@@ -206,7 +209,9 @@ const Products = ({ loaded, products, addToCart, cartItems, convertPriceToString
                 className={classes.root}
                 // height={400}
                 onClick={() => {
-                  setProduct(product);
+                  let currentProduct = product;
+                  currentProduct.price = convertPriceToString(product.price)
+                  setProduct(currentProduct);
                   handleOpen();
                 }}
 

@@ -12,6 +12,7 @@
   background-color: white;
   margin-bottom: 50px;
   z-index: 1;
+  box-shadow: 8px 6px -6px rgba(27, 27, 27, 0.534)
 }
 .container {
   display: grid;
@@ -104,11 +105,6 @@ cursor: pointer;
     padding: 1rem;
     margin-bottom: 1rem;
   }
-  .checkoutButton {
-    /* margin-top: 300px; */
-    color: rgb(204, 146, 146);
-    background-color: rgb(241, 210, 210);
-  }
 
   .products-container {
     grid-area: body;
@@ -151,10 +147,8 @@ cursor: pointer;
 
     }
     .cartContainer {
-      background-color:rgb(204, 146, 146);
       grid-area: 'list';
     }
     .checkoutArea {
-      background-color: purple;
       grid-area: 'checkout';
     }
