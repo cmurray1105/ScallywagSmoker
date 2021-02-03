@@ -6,105 +6,78 @@ import Tab from "@material-ui/core/Tab";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 // import AppBar from "@material-ui/core/AppBar";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Products from "./Products";
-import CheckoutModal from './CheckoutModal'
-
+import CheckoutModal from "./CheckoutModal";
 
 function Menu(props) {
-  const matches = useMediaQuery('(min-width:800px)');
+  const matches = useMediaQuery("(min-width:800px)");
   const [value, setValue] = React.useState(0);
-  const [hovered, setHovered] = React.useState(null)
-  const [currentVariant, setVariant] = React.useState('none');
-  console.log("PROPPPP", props)
+  const [hovered, setHovered] = React.useState(null);
   const useStyles = makeStyles((theme) => ({
     paper: {
       justifyContent: "center",
-      // flexGrow: 1,
-      // width: "100%",
-      color: 'red',
-      // backgroundColor:  'rgb(245, 245, 245)'
-      backgroundColor: 'white'
-      // backgroundColor: theme.palette.background.paper,
+      color: "red",
+      backgroundColor: "white",
     },
     hovered: {
-      color: 'white',
-      backgroundColor: 'red'
+      color: "white",
+      backgroundColor: "red",
     },
     scroller: {
-      flexGrow: "0"
-    }
+      flexGrow: "0",
+    },
   }));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     props.getProducts(props.categories[newValue]);
   };
-  const handleHover = (cat)=>{
-    console.log("CATEGORY", cat)
-    setHovered(cat)
-  }
-  const handleExit = ()=>{
-    setHovered('')
-  }
+  const handleHover = (cat) => {
+    console.log("CATEGORY", cat);
+    setHovered(cat);
+  };
+  const handleExit = () => {
+    setHovered("");
+  };
 
+  const classes = useStyles();
 
-  // React.useEffect(()=>{
-  // getCategories()})
-
-  const classes = useStyles()
-  // const categories = [
-  //   "Meats",
-  //   "Sides",
-  //   "Combos",
-  //   "Dessert",
-  //   "Catering",
-  //   "Gift Shop",
-  // ];
-  let mapTabs = (
-    props.categories.map((category)=>{
-      console.log(category)
-      return (
+  let mapTabs = props.categories.map((category) => {
+    console.log(category);
+    return (
       <Tab
-      onMouseEnter={()=>{handleHover(category)}}
-      onMouseLeave={() =>{handleExit()}}
-      className={hovered=== category ? classes.hovered : classes.paper}
-      label={category}>
-      </Tab>
-    )
-    })
-  )
-
-  // if (!matches){
-  //   setVariant('scrollable')
-  //   // console.log(matches)
-  // }
+        onMouseEnter={() => {
+          handleHover(category);
+        }}
+        onMouseLeave={() => {
+          handleExit();
+        }}
+        className={hovered === category ? classes.hovered : classes.paper}
+        label={category}
+      ></Tab>
+    );
+  });
 
   return (
-    <div >
-      {/* <AppBar position="static" color="default" centered> */}
-        <Tabs
-        classes={{root: classes.paper, scroller: classes.scroller}}
-        //  className="tab-content"
-          value={value}
-          variant={"scrollable"}
-          scrollButtons="auto"
-          onChange={handleChange}
-          centered
-        >
-          {mapTabs}
-        </Tabs>
-      {/* </AppBar> */}
-      {/* <div className="products-container"> */}
-
-          <Products
-            convertPriceToString={props.convertPriceToString}
-            addToCart={props.addToCart}
-            products={props.products}
-            loaded={props.loaded}
-            cartItems={props.cartItems}
-          />
-      {/* </div> */}
+    <div>
+      <Tabs
+        classes={{ root: classes.paper, scroller: classes.scroller }}
+        value={value}
+        variant={"scrollable"}
+        scrollButtons="auto"
+        onChange={handleChange}
+        centered
+      >
+        {mapTabs}
+      </Tabs>
+      <Products
+        convertPriceToString={props.convertPriceToString}
+        addToCart={props.addToCart}
+        products={props.products}
+        loaded={props.loaded}
+        cartItems={props.cartItems}
+      />
     </div>
   );
 }

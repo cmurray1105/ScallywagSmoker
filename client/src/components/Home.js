@@ -16,6 +16,7 @@ class Home extends Component {
       total: 0,
       cart: {},
       categories: [],
+      quantity: 0
       // productIds: [],
     };
     this.getProducts = this.getProducts.bind(this);
@@ -23,12 +24,24 @@ class Home extends Component {
     this.clearOrder = this.clearOrder.bind(this);
     this.getCategories = this.getCategories.bind(this);
     this.convertPriceToString = this.convertPriceToString.bind(this);
+    this.cartQuantityCalc = this.cartQuantityCalc.bind(this)
+    this.increaseQuantity = this.increaseQuantity.bind(this)
+    this.decreaseQuantity = this.increaseQuantity.bind(this)
     // this.categorySelected = this.categorySelected.bind(this)
   }
   componentDidMount() {
     this.getProducts("meats");
     this.getCategories();
+    this.cartQuantityCalc()
   }
+  cartQuantityCalc = () =>{
+    let total = 0;
+  for (let item in this.state.cart){
+    console.log("IQ", item)
+    total = total + this.state.cart[item].quantity
+  }
+  this.setState({quantity: total})
+}
   convertPriceToString = (price) => {
     let priceString = price.toString();
     console.log("First String", priceString)
@@ -69,6 +82,22 @@ class Home extends Component {
         console.log(err);
       });
   }
+  increaseQuantity(item) {
+    let cartItems = this.state.cart;
+    let quantity = this.state.cart[item].quantity;
+    quantity++
+    cartItems[item].quantity = quantity
+    this.setState({cart:cartItems})
+  }
+  decreaseQuantity(item) {
+    let cartItems = this.state.cart;
+    let quantity = this.state.cart[item].quantity;
+    quantity--
+    if (quantity >= 0){
+    cartItems[item].quantity = quantity
+    this.setState({cart:cartItems})
+  }
+}
   addToCart(item) {
     // let ids = this.state.productIds;
     let total = this.state.total;
@@ -80,10 +109,15 @@ class Home extends Component {
         id: item.id,
         originalQuantity: item.originalQuantity,
         price: item.price,
+        image: item.image_url,
+        productInfo: item.productInfo
+        // item: this.state.products[item]
       };
     } else {
+      // cartItems[item.productName].item.push(products[productName])
       cartItems[item.productName].quantity += item.quantity;
     }
+    this.cartQuantityCalc()
     console.log("TOTAL TYPE", typeof total);
     total += item.price * item.quantity;
     console.log("parse", parseInt(total));
@@ -104,7 +138,9 @@ class Home extends Component {
               total={this.state.total}
               products={this.state.products}
               cartItems={this.state.cart}
-              convertPriceToString={this.convertPriceToString}/>
+              convertPriceToString={this.convertPriceToString}
+              quantity={this.state.quantity}
+              />
           </div>
           <div className="header">
             <Banner />
@@ -113,8 +149,8 @@ class Home extends Component {
             <Menu
               addToCart={this.addToCart}
               getProducts={this.getProducts}
-              products={this.state.products}
               loaded={this.state.loaded}
+              products={this.state.products}
               cartItems={this.state.cart}
               categories={this.state.categories}
               convertPriceToString={this.convertPriceToString}

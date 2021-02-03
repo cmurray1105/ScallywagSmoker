@@ -7,25 +7,14 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 // import "./styles.css";
 import CartPopper from './CartPopper';
 import CheckoutModal from './CheckoutModal'
+import CartItem from './CartItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 function Navbar (props) {
   const [open, setOpen] = React.useState(false);
-  const [background, setBackground]= React.useState('white');
-  const [textColor, setTextColor] = React.useState('red')
-
-  const handleEnter = ()=>{
-    setBackground('red')
-    setTextColor('white')
-  }
-  const handleExit = ()=>{
-    setBackground('white')
-    setTextColor('red')
-  }
-  const handleClickAway = () => {
-    setOpen(false);
-  };
-
+  const [anchorEl, handleAnchor] = React.useState(null);
+  const [arrowRef, handleArrowRef] = React.useState(null);
+  const [cartItems, setCartItem] = React.useState([]);
   const useStyles = makeStyles((theme) => ({
     paper: {
       border: "none",
@@ -44,29 +33,21 @@ function Navbar (props) {
     },
     buttonContainer:{
       textAlign: 'center',
-      // float: 'right',
-      marginLeft:'87%'
-      // marginRight:'25%',
+      marginLeft:'65%'
     },
     button: {
       height: '38px',
       width:'38px',
-      background: background,
-      // fontWeight : 'bold',
-      // borderRadius: 2,
+      background: 'white',
       border: 'none',
-      color: textColor,
-      // boxShadow: '0 3px 5px 2px  grey',
+      color: 'red',
+      cursor: 'pointer',
       textAlign: 'center',
       display: 'inline-block',
-      // marginLeft: 'auto',
-      // marginRight: 'auto',
+      outline: 'none'
     },
     cartContainer: {
       gridArea: 'list',
-      // gridTemplateColumns: ' 1fr 1fr 1fr',
-      // gridTemplateRows: '1fr 1fr 1f 1fr',
-      // gridTemplateAreas: " 'side list side' 'side list side' 'side list side' 'side checkout side' "
     },
     checkoutArea: {
       gridArea: 'checkout'
@@ -74,38 +55,38 @@ function Navbar (props) {
   })
   )
   const classes = useStyles();
-  const [anchorEl, handleAnchor] = React.useState(null);
-  const [arrowRef, handleArrowRef] = React.useState(null)
+
+
+  const node = React.useRef();
+  console.log("nodey node:", node)
 
   const handleClick = (event) => {
     handleAnchor(anchorEl ? null : event.currentTarget);
+    console.log("ANCHORS AWAY!", anchorEl)
     setOpen(!open)
   };
+
+  let items = []
+  for (let order in props.cartItems){
+    items.push(props.cartItems[order])
+  }
+
   return(
-    // <CssBaseline />
-    // <Container maxWidth="sm">
-    // <CartPopper
-    //       content={content}
-    //       open={open}
-    //       placement="bottom"
-    //       onClose={() => setOpen(false)}
-    //       arrow={true}
-    //       anchorEl={anchorEl}
-    //     >
-    <ClickAwayListener onClickAway={handleClickAway}>
+
+    // <ClickAwayListener onClickAway={handleClickAway}>
     <div >
-    <div className={classes.buttonContainer}>
+    <div className={classes.buttonContainer} >
                   <button
                   className={classes.button}
                   onClick={handleClick}
-                  onMouseEnter={handleEnter}
-                  onMouseLeave={handleExit}
                   >
                   <FontAwesomeIcon icon={faShoppingCart} size='2x'/>
-                  {}
+                  <span>{props.quantity}</span>
+
                 </button>
                 </div>
                     <CartPopper
+                  ref={node}
                   placement="top"
                   open={open}
                   anchorEl={anchorEl}
@@ -128,18 +109,24 @@ function Navbar (props) {
                     <span className="arrow" ref={handleArrowRef} />
                   }
                   <div className={classes.paper}>
-                  {/* <div className="wrapper"> */}
                   <div className="cartContainer">
-                  LIST
+{/* MAP CART ITEMS OR DISPLAY EMPTY CART */}
+{
+  items.map((item)=>(
+    <CartItem products={props.products} item={item}/>
+  ))
+  }
                   </div>
                   <div className="checkoutArea">
+{/* IF CART IS NOT EMPTY RENDER CHECKOUTMODAL BUTTON*/}
+{props.quantity > 0 ?
                     <CheckoutModal clearOrder={props.clearOrder} total={props.total} products={props.products} cartItems={props.cartItems} />
-                  {/* </div> */}
+: null }
 </div>
                   </div>
                 </CartPopper>
     </div>
-                </ClickAwayListener>
+                // </ClickAwayListener>
   )
 }
 export default Navbar;

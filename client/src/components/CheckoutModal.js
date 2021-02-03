@@ -14,6 +14,7 @@ import * as emailjs from 'emailjs-com'
 emailjs.init("user_975JwJzPB6r4yxiDzOfHn");
 
 export default function CheckoutModal(props) {
+
   const [open, setOpen] = React.useState(false);
   const [neighborhood, handleChange] = React.useState("Santa Rita Ranch South");
   const [customerName, handleNameChange] = React.useState("");
@@ -21,6 +22,22 @@ export default function CheckoutModal(props) {
   const [startDate, setStartDate] = React.useState(new Date());
   const [email, handleEmailChange] = React.useState("");
   const [phone, handlePhoneChange] = React.useState(null);
+  const [background, setBackground]= React.useState('red');
+  const [textColor, setTextColor] = React.useState('white')
+  const [border, setBorder] = React.useState('none')
+
+  const handleEnter = ()=>{
+    setBackground('white')
+    setTextColor('red')
+    setBorder('0')
+
+  }
+  const handleExit = ()=>{
+    setBackground('red')
+    setTextColor('white')
+    setBorder('none')
+  }
+
 
   console.log("props", props)
   const useStyles = makeStyles((theme) => ({
@@ -29,42 +46,60 @@ export default function CheckoutModal(props) {
       width: 400,
       maxHeight: 800,
       backgroundColor: theme.palette.background.paper,
-      border: "none",
+      border: 'none',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
-      outline: "none",
+      outline: 'none',
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
       borderRadius: '5%'
     },
+    button: {
+      background: background,
+      color: textColor,
+      cursor: 'pointer',
+      fontWeight : 'bold',
+      outline: 'none',
+      // border: border,
+      borderRadius: 2,
+      // borderColor: textColor,
+      border: border,
+      height: 48,
+      padding: '0 30px',
+      boxShadow: '0 3px 5px 2px  grey',
+      display: 'block',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      bottom: 0
+    }
   }));
 
-  const theme = createMuiTheme({
-    overrides: {
-      // Style sheet name ⚛️
-      MuiButton: {
-        // Name of the rule
-        text: {
-          // Some CSS
-          background: 'white',
-          fontWeight : 'bold',
-          borderRadius: 3,
-          border: 0,
-          color: 'red',
-          height: 48,
-          padding: '0 30px',
-          boxShadow: '0 3px 5px 2px  grey',
-          display: 'block',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          bottom: 0
+  // const theme = createMuiTheme({
+  //   overrides: {
+  //     // Style sheet name ⚛️
+  //     MuiButton: {
+  //       // Name of the rule
+  //       text: {
+  //         // Some CSS
+          // background: background,
+          // // fontWeight : 'bold',
+          // borderRadius: 3,
+          // border: 0,
+          // color: textColor,
+          // height: 48,
+          // padding: '0 30px',
+          // boxShadow: '0 3px 5px 2px  grey',
+          // display: 'block',
+          // marginLeft: 'auto',
+          // marginRight: 'auto',
+          // bottom: 0
 
-        },
+  //       },
 
-      },
-    },
-  });
+  //     },
+  //   },
+  // });
 
 
   const classes = useStyles();
@@ -219,7 +254,12 @@ export default function CheckoutModal(props) {
             {/* <br/> */}
           </label>
           <br />
-          <Button type="submit" value="Submit">Submit</Button>
+          <Button
+          type="submit"
+          value="Submit"
+
+          >Submit
+          </Button>
         </form>
       </div>
     </div>
@@ -227,12 +267,15 @@ export default function CheckoutModal(props) {
   console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
   return (
     <div>
-        <ThemeProvider theme={theme}>
-      <Button className="checkoutButton" onClick={handleOpen}>
-      {/* <FontAwesomeIcon icon={["far", "coffee"]} /> */}
-      Checkout
-      </Button>
-      </ThemeProvider>
+        {/* <ThemeProvider theme={theme}> */}
+      <button
+      className={classes.button}
+      onClick={handleOpen}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleExit}>
+      PROCEED TO CHECKOUT
+      </button>
+      {/* </ThemeProvider> */}
       <Modal
         open={open}
         onClose={handleClose}

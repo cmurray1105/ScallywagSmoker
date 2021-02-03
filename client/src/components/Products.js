@@ -127,6 +127,7 @@ const Products = ({ loaded, products, addToCart, cartItems, convertPriceToString
           price: currentProduct.price,
           id: currentProduct.id,
           originalQuantity: currentProduct.quantity,
+          productInfo: currentProduct
         });
         // getProducts(currentProduct.category)
         handleClose();

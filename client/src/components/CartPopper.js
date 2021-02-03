@@ -35,17 +35,16 @@ const CartPopper = styled(Popper)`&&{
 
   &[x-placement*="top"] .arrow{
 
-    bottom: 0;
     width: 0;
     height: 0;
     border-left: 1em solid transparent;
     border-right: 1em solid transparent;
-    border-top: 1em solid white;
-    margin-bottom: -0.9em;
+    border-bottom: 1em solid white;
+    margin-top: -0.9em;
 
     &:before {
-      border-width: 1em 1em 0 1em;
-      border-color: white transparent transparent transparent;
+      border-width: '0 1em 1em 1em';
+      border-color: 'transparent transparent white transparent';
     }
   }
 
