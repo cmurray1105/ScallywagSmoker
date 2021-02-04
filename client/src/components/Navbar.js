@@ -63,6 +63,12 @@ function Navbar(props) {
       marginLeft: '40%',
       // marginTop: '10%',
       // transform: 'translate(50%, 50%)'
+    },
+    emptyCart: {
+      // position: 'absolute',
+      // marginTop: '50%',
+      // marginLeft: '40%',
+      alignItems: 'center'
     }
   }));
   const classes = useStyles();
@@ -125,7 +131,8 @@ function Navbar(props) {
         <div className={classes.paper}>
           <div className="cartContainer">
             {/* MAP CART ITEMS OR DISPLAY EMPTY CART */}
-            {items.map((item) => (
+
+            {props.quantity > 0 ? items.map((item) => (
               <>
                 <CartItem
                   increaseQuantity={props.increaseQuantity}
@@ -136,7 +143,13 @@ function Navbar(props) {
                 />
                 <hr />
               </>
-            ))}
+            )):
+
+            <div>
+            <FontAwesomeIcon className={classes.emptyCart} icon={faShoppingCart} size="5x" />
+            <h1 className={classes.emptyCart}>Your Cart Is Empty</h1>
+            </div>
+            }
           </div>
 
           <div className="checkoutArea">
@@ -155,13 +168,8 @@ function Navbar(props) {
                   cartItems={props.cartItems}
                 />
               </>
-            ) :
-            <>
-            <h1>Your Cart Is Empty</h1>
-            <div>
-            <FontAwesomeIcon icon={faShoppingCart} size="5x" />
-            </div>
-            </>}
+            ) : null
+}
           </div>
         </div>
       </CartPopper>
