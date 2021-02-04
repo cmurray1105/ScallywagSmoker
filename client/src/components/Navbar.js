@@ -24,7 +24,7 @@ function Navbar (props) {
       zIndex: 3,
       height: 'max-content',
       minHeight: '400px',
-      width: '400px',
+      width: '500px',
       borderRadius: '6px',
       margin:'auto',
       display: 'grid',
