@@ -25,6 +25,9 @@ export default function CheckoutModal(props) {
   const [background, setBackground]= React.useState('red');
   const [textColor, setTextColor] = React.useState('white')
   const [border, setBorder] = React.useState('none')
+  const [subBackground, setSubBackground]= React.useState('red');
+  const [subText, setSubTextColor] = React.useState('white')
+  const [subBorder, setSubBorder] = React.useState('none')
 
   const handleEnter = ()=>{
     setBackground('white')
@@ -36,6 +39,17 @@ export default function CheckoutModal(props) {
     setBackground('red')
     setTextColor('white')
     setBorder('none')
+  }
+  const handleSubEnter = ()=>{
+    setSubBackground('white')
+    setSubTextColor('red')
+    setSubBorder('0')
+
+  }
+  const handleSubExit = ()=>{
+    setSubBackground('red')
+    setSubTextColor('white')
+    setSubBorder('none')
   }
 
 
@@ -65,6 +79,24 @@ export default function CheckoutModal(props) {
       borderRadius: 2,
       // borderColor: textColor,
       border: border,
+      height: 48,
+      padding: '0 30px',
+      boxShadow: '0 3px 5px 2px  grey',
+      display: 'block',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      bottom: 0
+    },
+    submitButton: {
+      background: subBackground,
+      color: subText,
+      cursor: 'pointer',
+      fontWeight : 'bold',
+      outline: 'none',
+      // border: border,
+      borderRadius: 2,
+      // borderColor: textColor,
+      border: subBorder,
       height: 48,
       padding: '0 30px',
       boxShadow: '0 3px 5px 2px  grey',
@@ -255,9 +287,11 @@ export default function CheckoutModal(props) {
           </label>
           <br />
           <Button
+          className={classes.submitButton}
           type="submit"
           value="Submit"
-
+          onMouseEnter={()=>{handleSubEnter()}}
+          onMouseLeave={()=>{handleSubExit()}}
           >Submit
           </Button>
         </form>
