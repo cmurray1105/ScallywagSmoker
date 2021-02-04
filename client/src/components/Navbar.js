@@ -31,6 +31,7 @@ function Navbar(props) {
       gridTemplateColumns: "1fr 1fr 1fr",
       gridTemplateRows: "4fr 1fr",
       gridTemplateAreas: " 'side list side'  'side checkout side",
+      alignItems: 'center'
     },
     buttonContainer: {
       display: "flex",
