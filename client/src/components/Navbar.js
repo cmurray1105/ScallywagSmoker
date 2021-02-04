@@ -140,11 +140,11 @@ function Navbar(props) {
                 <div className={classes.total}>
                   <hr />
                   <h2>$ {props.convertPriceToString(total)}</h2>
-                  <hr />
+                  {/* <hr /> */}
                 </div>
                 <CheckoutModal
                   clearOrder={props.clearOrder}
-                  total={props.total}
+                  total={total}
                   products={props.products}
                   cartItems={props.cartItems}
                 />
