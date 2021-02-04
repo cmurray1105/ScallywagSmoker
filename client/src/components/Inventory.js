@@ -33,10 +33,9 @@ return(
 </div>
 <div>
 <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
+        <Table>
           <TableHead>
             <TableRow>
-              <TableCell />
               <TableCell> Product </TableCell>
               <TableCell align="right">Quantity</TableCell>
               <TableCell align="right">Price

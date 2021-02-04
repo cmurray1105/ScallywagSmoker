@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 function Navbar (props) {
   const [open, setOpen] = React.useState(false);
-  const [height, setHeight] = React.useState(null);
+  const [height, setHeight] = React.useState('400px');
   const [anchorEl, handleAnchor] = React.useState(null);
   const [arrowRef, handleArrowRef] = React.useState(null);
   const useStyles = makeStyles((theme) => ({
@@ -22,7 +22,8 @@ function Navbar (props) {
       padding: theme.spacing(1),
       backgroundColor: theme.palette.background.paper,
       zIndex: 3,
-      height: '400px',
+      height: 'max-content',
+      minHeight: '400px',
       width: '400px',
       borderRadius: '6px',
       margin:'auto',
@@ -74,9 +75,9 @@ function Navbar (props) {
   }
 
   // if (Object.keys(props.cartItems).length > 4){
-  //   let newHeight = 400;
-  //   let itemsOver4 = Object.keys(props.cartItems).length
-  //   setHeight()
+  //   let itemsOverFour = Object.keys(props.cartItems).length - 4
+  //   let newHeight = (400 + 64 * itemsOverFour).toString()+'px'
+  //   setHeight(newHeight)
   // }
 
   return(

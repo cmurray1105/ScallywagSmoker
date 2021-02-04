@@ -26,9 +26,9 @@ function InventoryRow(props) {
   return (
 <>
 <TableRow className={classes.root}>
-<TableCell component="th" scope="row">{row.name}</TableCell>
-<TableCell align="right">{row.neighborhood}</TableCell>
-<TableCell align="right">{row.neighborhood}</TableCell>
+<TableCell component="th" scope="row">{row.product_name}</TableCell>
+<TableCell align="right">{row.quantity}</TableCell>
+<TableCell align="right">{row.price}</TableCell>
 </TableRow>
 </>
   )

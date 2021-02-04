@@ -9,7 +9,13 @@ import {
 import Home from './components/Home';
 import Admin from './components/Admin'
 // import Orders from './components/Orders';
-export default function App() {
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+  }
+  render(){
   return (
     <Router>
 
@@ -38,6 +44,7 @@ export default function App() {
       </div>
     </Router>
   );
+}
 }
 
 // function Home() {
