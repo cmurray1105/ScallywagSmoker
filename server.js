@@ -12,12 +12,7 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("just gonna send it");
 });
-app.get("/flower", (req, res) => {
-  res.json({
-    name: "Dandelion",
-    colour: "Blue-ish",
-  });
-});
+
 app.get("/products", (req, res) => {
   // console.log('server', req.query.product)
   db.getProducts(req.query.product, (err, result) => {
@@ -132,6 +127,18 @@ app.get("/categories", (req, res)=>{
     }
   })
 })
+
+app.get("/inventory", (req, res) => {
+  // console.log('server', req.query.product)
+  db.getInventory( (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("inventory", result)
+      res.send(result);
+    }
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening at port ${PORT}. cwm`);

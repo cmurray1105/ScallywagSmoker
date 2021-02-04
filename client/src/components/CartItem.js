@@ -4,8 +4,10 @@ import { Card, CardContent, CardMedia, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     height: '64px',
-    display: 'flex',
-    flexDirection: 'row'
+    display: 'grid',
+    gridTemplateColumns: '1fr 2fr 1fr',
+    gridTemplateRows: '1fr',
+    gridTemplateAreas: "'image product quantity'"
 
   },
   media: {
@@ -14,6 +16,7 @@ const useStyles = makeStyles({
     // justifyContent: 'space-between',
     height: '64px',
     borderRadius: '15%',
+    gridArea: 'image'
   },
   wrapper: {
     // display: 'inline-flex',
@@ -24,7 +27,20 @@ const useStyles = makeStyles({
     // justifyContent: 'center',
     marginLeft: '25px',
     verticalAlign: 'middle',
+    margin: 'auto',
+    gridArea: 'product'
     // display: 'inline-block'
+  },
+  quantButton: {
+    marginTop: '20px',
+    marginLeft: '20px',
+    gridArea:'quantity',
+    verticalAlign: 'middle',
+    float: 'right'
+  },
+  quantString: {
+    marginLeft:'5px',
+    marginRight:'5px'
   }
 });
 const CartItem = (props) =>{
@@ -39,11 +55,11 @@ const CartItem = (props) =>{
   }
 }
 const handleDecrease = () =>{
-  console.log("hit in cart item")
+  console.log("hit in cart item de")
   props.decreaseQuantity(props.item.productInfo.product_name)
 }
 const handleIncrease = () =>{
-  console.log("hit in cart item")
+  console.log("hit in cart item inc")
   props.increaseQuantity(props.item.productInfo.product_name)
 }
 console.log("CP", currentProduct)
@@ -55,11 +71,12 @@ return (
           className={classes.media}
           src={props.item.productInfo.image_url}
         />
-        <h4 className={classes.text}> {props.item.productInfo.product_name} ${props.item.quantity * props.item.productInfo.price}</h4>
+        <h4 className={classes.text}> {props.item.productInfo.product_name} ${props.convertPriceToString(props.item.quantity * props.item.productInfo.price)}</h4>
+        <div className={classes.quantButton}>
   <button className="value-button" id="decrease" onClick={handleDecrease}>-</button>
-  {props.item.quantity}
+  <span className={classes.quantString}>{props.item.quantity}</span>
   <button className="value-button" id="increase" onClick={handleIncrease} value="Increase Value">+</button>
-
+</div>
 
   </div>
 

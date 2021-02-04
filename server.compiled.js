@@ -17,12 +17,6 @@ app.use(bodyParser.json());
 app.get("/", function (req, res) {
   res.send("just gonna send it");
 });
-app.get("/flower", function (req, res) {
-  res.json({
-    name: "Dandelion",
-    colour: "Blue-ish"
-  });
-});
 app.get("/products", function (req, res) {
   // console.log('server', req.query.product)
   db.getProducts(req.query.product, function (err, result) {
@@ -122,6 +116,17 @@ app.get("/categories", function (req, res) {
       console.log(err);
     } else {
       console.log("categories", result);
+      res.send(result);
+    }
+  });
+});
+app.get("/inventory", function (req, res) {
+  // console.log('server', req.query.product)
+  db.getInventory(function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("inventory", result);
       res.send(result);
     }
   });

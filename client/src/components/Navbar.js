@@ -124,7 +124,9 @@ function Navbar (props) {
     <CartItem
       increaseQuantity={props.increaseQuantity}
       decreaseQuantity={props.decreaseQuantity}
-      products={props.products} item={item}
+      products={props.products}
+      item={item}
+      convertPriceToString={props.convertPriceToString}
       />
     <hr/>
     </>

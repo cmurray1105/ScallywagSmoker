@@ -7,7 +7,8 @@ import {
   Link
 } from "react-router-dom";
 import Home from './components/Home';
-import Orders from './components/Orders';
+import Admin from './components/Admin'
+// import Orders from './components/Orders';
 export default function App() {
   return (
     <Router>
@@ -16,8 +17,8 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/orders">
-            <Orders />
+          <Route path="/Admin">
+            <Admin />
           </Route>
           <Route path="/">
             <Home />
@@ -30,7 +31,7 @@ export default function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/orders">Orders</Link>
+              <Link to="/Admin">Orders</Link>
             </li>
           </ul>
         </nav>

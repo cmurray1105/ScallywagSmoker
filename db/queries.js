@@ -78,5 +78,14 @@ const getCategories = (cb)=>{
     }
   })
 }
+const getInventory = (cb)=>{
+  connection.query('SELECT * from product', (err, result)=>{
+    if (err) {
+      cb(err, null)
+    } else {
+      cb(null, result)
+    }
+  })
+}
 
-module.exports ={getProducts, getOrders, addDelivery, addItemToOrder, updateQuantity, getCategories}
+module.exports ={getProducts, getOrders, addDelivery, addItemToOrder, updateQuantity, getCategories, getInventory}

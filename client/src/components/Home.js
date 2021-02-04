@@ -26,7 +26,7 @@ class Home extends Component {
     this.convertPriceToString = this.convertPriceToString.bind(this);
     this.cartQuantityCalc = this.cartQuantityCalc.bind(this)
     this.increaseQuantity = this.increaseQuantity.bind(this)
-    this.decreaseQuantity = this.increaseQuantity.bind(this)
+    this.decreaseQuantity = this.decreaseQuantity.bind(this)
     // this.categorySelected = this.categorySelected.bind(this)
   }
   componentDidMount() {
@@ -83,6 +83,7 @@ class Home extends Component {
       });
   }
   increaseQuantity(item) {
+    console.log("CALLED IN INCREASE")
     let cartItems = this.state.cart;
     cartItems[item].quantity++
     this.setState({cart:cartItems})
@@ -93,8 +94,8 @@ class Home extends Component {
     let quantity = this.state.cart[item].quantity;
     console.log("1", quantity)
     cartItems[item].quantity--
-    if (cartItems[item].quantity < 0){
-      cartItems[item].quantity = 0;
+    if (cartItems[item].quantity === 0){
+      delete cartItems[item]
   }
   this.setState({cart:cartItems})
 }
@@ -126,6 +127,7 @@ class Home extends Component {
 
   clearOrder() {
     this.setState({ cart: {}, total: 0 });
+    this.cartQuantityCalc()
   }
 
   render() {
