@@ -54,6 +54,9 @@ function Navbar (props) {
     },
     checkoutArea: {
       gridArea: 'checkout'
+    },
+    total: {
+      height: '64px'
     }
   })
   )
@@ -134,12 +137,20 @@ function Navbar (props) {
   ))
   }
                   </div>
+
                   <div className="checkoutArea">
 {/* IF CART IS NOT EMPTY RENDER CHECKOUTMODAL BUTTON*/}
 {props.quantity > 0 ?
+<>
+  <div className={classes.total}>
+                  {console.log("NAVBAR PROP", props)}
+<hr/>
+</div>
                     <CheckoutModal clearOrder={props.clearOrder} total={props.total} products={props.products} cartItems={props.cartItems} />
+                    </>
 : null }
 </div>
+
                   </div>
                 </CartPopper>
     </div>
