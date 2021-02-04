@@ -87,17 +87,16 @@ class Home extends Component {
     let cartItems = this.state.cart;
     cartItems[item].quantity++
     this.setState({cart:cartItems})
+    this.cartQuantityCalc()
   }
   decreaseQuantity(item) {
-    console.log("CALLED IN DECREASE")
     let cartItems = this.state.cart;
-    let quantity = this.state.cart[item].quantity;
-    console.log("1", quantity)
     cartItems[item].quantity--
     if (cartItems[item].quantity === 0){
       delete cartItems[item]
   }
   this.setState({cart:cartItems})
+  this.cartQuantityCalc()
 }
   addToCart(item) {
     // let ids = this.state.productIds;

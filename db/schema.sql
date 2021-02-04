@@ -1,8 +1,8 @@
 DROP DATABASE IF EXISTS ebdb;
 
-CREATE DATABASE ebdb;
+CREATE DATABASE barbecue;
 
-USE ebdb;
+USE barbecue;
 
 CREATE TABLE product (
   id INT PRIMARY KEY AUTO_INCREMENT,
