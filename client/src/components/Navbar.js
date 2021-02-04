@@ -133,7 +133,7 @@ function Navbar(props) {
               <>
                 <div className={classes.total}>
                   <hr />
-                  {("NAVBAR PROP", props.total)}
+                  <h2>{props.total}</h2>
                   <hr />
                 </div>
                 <CheckoutModal
