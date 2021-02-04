@@ -4,23 +4,27 @@ import { Card, CardContent, CardMedia, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     height: '64px',
-    width: '400px',
+    display: 'flex',
+    flexDirection: 'row'
 
   },
   media: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // flexDirection: 'row',
+    // display: 'inline',
+    // justifyContent: 'space-between',
     height: '64px',
     borderRadius: '15%',
   },
   wrapper: {
-    display: 'inline-flex',
-    alignItems: 'flex-start'
+    // display: 'inline-flex',
+    // alignItems: 'flex-start'
   },
   text: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // justifyContent: 'center',
-    verticalAlign: 'middle'
+    marginLeft: '25px',
+    verticalAlign: 'middle',
+    // display: 'inline-block'
   }
 });
 const CartItem = (props) =>{
@@ -34,23 +38,31 @@ const CartItem = (props) =>{
       currentProduct = props.products[i]
   }
 }
+const handleDecrease = () =>{
+  console.log("hit in cart item")
+  props.decreaseQuantity(props.item.productInfo.product_name)
+}
+const handleIncrease = () =>{
+  console.log("hit in cart item")
+  props.increaseQuantity(props.item.productInfo.product_name)
+}
 console.log("CP", currentProduct)
 return (
 
-  <div className='cart-item-entry'>
+
   <div className={classes.root}>
-  <div className={classes.wrapper}>
    <img
           className={classes.media}
           src={props.item.productInfo.image_url}
         />
-        <div className={classes.text}>
-        <h4 className={classes.text}>{props.item.quantity} x {props.item.productInfo.product_name} ${props.item.quantity * props.item.productInfo.price}</h4>
-         </div>
-      </div>
+        <h4 className={classes.text}> {props.item.productInfo.product_name} ${props.item.quantity * props.item.productInfo.price}</h4>
+  <button className="value-button" id="decrease" onClick={handleDecrease}>-</button>
+  {props.item.quantity}
+  <button className="value-button" id="increase" onClick={handleIncrease} value="Increase Value">+</button>
+
+
   </div>
-  <hr/>
-  </div>
+
 
 )
 }

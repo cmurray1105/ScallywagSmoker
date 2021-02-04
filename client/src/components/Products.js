@@ -37,7 +37,7 @@ const Products = ({ loaded, products, addToCart, cartItems, convertPriceToString
       outline: "none",
       border: "none",
       float: 'left',
-      // alignItems: "center",
+      alignItems: "center",
     },
     media: {
       height: 250,

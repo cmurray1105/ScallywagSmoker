@@ -12,9 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 function Navbar (props) {
   const [open, setOpen] = React.useState(false);
+  const [height, setHeight] = React.useState(null);
   const [anchorEl, handleAnchor] = React.useState(null);
   const [arrowRef, handleArrowRef] = React.useState(null);
-  const [cartItems, setCartItem] = React.useState([]);
   const useStyles = makeStyles((theme) => ({
     paper: {
       border: "none",
@@ -32,8 +32,10 @@ function Navbar (props) {
       gridTemplateAreas: " 'side list side'  'side checkout side"
     },
     buttonContainer:{
+      display: 'flex',
+      flexDirection: 'row',
       textAlign: 'center',
-      marginLeft:'65%'
+      marginLeft:'85%'
     },
     button: {
       height: '38px',
@@ -71,6 +73,12 @@ function Navbar (props) {
     items.push(props.cartItems[order])
   }
 
+  // if (Object.keys(props.cartItems).length > 4){
+  //   let newHeight = 400;
+  //   let itemsOver4 = Object.keys(props.cartItems).length
+  //   setHeight()
+  // }
+
   return(
 
     // <ClickAwayListener onClickAway={handleClickAway}>
@@ -82,7 +90,6 @@ function Navbar (props) {
                   >
                   <FontAwesomeIcon icon={faShoppingCart} size='2x'/>
                   <span>{props.quantity}</span>
-
                 </button>
                 </div>
                     <CartPopper
@@ -113,7 +120,14 @@ function Navbar (props) {
 {/* MAP CART ITEMS OR DISPLAY EMPTY CART */}
 {
   items.map((item)=>(
-    <CartItem products={props.products} item={item}/>
+    <>
+    <CartItem
+      increaseQuantity={props.increaseQuantity}
+      decreaseQuantity={props.decreaseQuantity}
+      products={props.products} item={item}
+      />
+    <hr/>
+    </>
   ))
   }
                   </div>

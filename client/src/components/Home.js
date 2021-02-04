@@ -84,19 +84,19 @@ class Home extends Component {
   }
   increaseQuantity(item) {
     let cartItems = this.state.cart;
-    let quantity = this.state.cart[item].quantity;
-    quantity++
-    cartItems[item].quantity = quantity
+    cartItems[item].quantity++
     this.setState({cart:cartItems})
   }
   decreaseQuantity(item) {
+    console.log("CALLED IN DECREASE")
     let cartItems = this.state.cart;
     let quantity = this.state.cart[item].quantity;
-    quantity--
-    if (quantity >= 0){
-    cartItems[item].quantity = quantity
-    this.setState({cart:cartItems})
+    console.log("1", quantity)
+    cartItems[item].quantity--
+    if (cartItems[item].quantity < 0){
+      cartItems[item].quantity = 0;
   }
+  this.setState({cart:cartItems})
 }
   addToCart(item) {
     // let ids = this.state.productIds;
@@ -140,6 +140,8 @@ class Home extends Component {
               cartItems={this.state.cart}
               convertPriceToString={this.convertPriceToString}
               quantity={this.state.quantity}
+              increaseQuantity={this.increaseQuantity}
+              decreaseQuantity={this.decreaseQuantity}
               />
           </div>
           <div className="header">
