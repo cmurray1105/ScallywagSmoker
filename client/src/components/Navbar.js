@@ -133,7 +133,7 @@ function Navbar(props) {
               <>
                 <div className={classes.total}>
                   <hr />
-                  <h2>{props.total}</h2>
+                  <h2>{props.convertPriceToString(props.total)}</h2>
                   <hr />
                 </div>
                 <CheckoutModal
