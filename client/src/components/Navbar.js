@@ -31,7 +31,7 @@ function Navbar(props) {
       gridTemplateColumns: "1fr 1fr 1fr",
       gridTemplateRows: "4fr 1fr",
       gridTemplateAreas: " 'side list side'  'side checkout side",
-      alignItems: 'center'
+      // alignItems: 'center'
     },
     buttonContainer: {
       display: "flex",
@@ -59,6 +59,10 @@ function Navbar(props) {
     total: {
       height: "64px",
     },
+    totalText: {
+      marginLeft: "50%",
+      marginRight: "50%"
+    }
   }));
   const classes = useStyles();
 
@@ -140,7 +144,7 @@ function Navbar(props) {
               <>
                 <div className={classes.total}>
                   <hr />
-                  <h2>$ {props.convertPriceToString(total)}</h2>
+                  <h2 className={classes.totalText}>$ {props.convertPriceToString(total)}</h2>
                   {/* <hr /> */}
                 </div>
                 <CheckoutModal
