@@ -80,11 +80,11 @@ function Navbar(props) {
   //   let newHeight = (400 + 64 * itemsOverFour).toString()+'px'
   //   setHeight(newHeight)
   // }
-  let total = 0;
-  for (let item in props.cartItems){
-    // console.log("WHAT AN ITEM LOOKS LIKE",
-    total = total + ((props.cartItems[item].price) * props.cartItems[item].quantity)
-  }
+  // let total = 0;
+  // for (let item in props.cartItems){
+  //   // console.log("WHAT AN ITEM LOOKS LIKE",
+  //   total = total + ((props.cartItems[item].price) * props.cartItems[item].quantity)
+  // }
 
 
   return (
@@ -139,7 +139,7 @@ function Navbar(props) {
               <>
                 <div className={classes.total}>
                   <hr />
-                  <h2>$ {props.convertPriceToString(total)}</h2>
+                  {/* <h2>$ {props.convertPriceToString(total)}</h2> */}
                   <hr />
                 </div>
                 <CheckoutModal
