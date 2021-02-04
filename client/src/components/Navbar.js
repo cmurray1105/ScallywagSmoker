@@ -60,8 +60,9 @@ function Navbar(props) {
       height: "64px",
     },
     totalText: {
-      marginLeft: "50%",
-      marginRight: "50%"
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)'
     }
   }));
   const classes = useStyles();
@@ -144,7 +145,7 @@ function Navbar(props) {
               <>
                 <div className={classes.total}>
                   <hr />
-                  <h2 className={classes.totalText}>$ {props.convertPriceToString(total)}</h2>
+                  <h2 className={classes.totalText}>${props.convertPriceToString(total)}</h2>
                   {/* <hr /> */}
                 </div>
                 <CheckoutModal
