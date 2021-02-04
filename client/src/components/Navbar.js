@@ -155,7 +155,13 @@ function Navbar(props) {
                   cartItems={props.cartItems}
                 />
               </>
-            ) : null}
+            ) :
+            <>
+            <h1>Your Cart Is Empty</h1>
+            <div>
+            <FontAwesomeIcon icon={faShoppingCart} size="5x" />
+            </div>
+            </>}
           </div>
         </div>
       </CartPopper>
