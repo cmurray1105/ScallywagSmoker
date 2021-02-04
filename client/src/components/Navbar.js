@@ -60,9 +60,9 @@ function Navbar(props) {
       height: "64px",
     },
     totalText: {
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)'
+      marginLeft: '40%',
+      // marginTop: '10%',
+      // transform: 'translate(50%, 50%)'
     }
   }));
   const classes = useStyles();
