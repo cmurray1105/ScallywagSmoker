@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import InventoryRow from './InventoryRow'
+import AddInventory from './AddInventory'
 const Inventory = (props) =>{
 const [inventory, setInventory] = React.useState([])
 
@@ -51,6 +52,7 @@ return(
         </Table>
       </TableContainer>
 </div>
+<AddInventory getCategories={props.categories} />
 </div>
 )
 }
