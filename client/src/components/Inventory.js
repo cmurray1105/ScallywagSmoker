@@ -12,10 +12,10 @@ import AddInventory from './AddInventory'
 const Inventory = (props) =>{
 const [inventory, setInventory] = React.useState([])
 
+console.log("INV PROPS", propss)
 React.useEffect(() => {
   // Update the document title using the browser API
   getInventory()
-  console.log("INV PROPS", props)
 }, []);
 
 const getInventory = () =>{

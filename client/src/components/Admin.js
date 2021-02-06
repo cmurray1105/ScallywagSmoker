@@ -51,6 +51,7 @@ const Admin = (props) =>{
       ></Tab>
     );
   });
+  console.log(props)
   const handleChange = (event, newValue) => {
     setValue(newValue);
     // props.getProducts(categories[newValue]);
@@ -64,7 +65,7 @@ const Admin = (props) =>{
      } else if (categories[newValue] === 'inventory') {
       let displayPage = (
         <div>
-          <Inventory getCategories={props.getCategories}/>
+          <Inventory getCategories={getCategories}/>
         </div>
       )
       setPage(displayPage)

@@ -14,7 +14,7 @@ import * as emailjs from 'emailjs-com'
 emailjs.init("user_975JwJzPB6r4yxiDzOfHn");
 
 export default function AddInventory(props) {
-
+console.log("proppy props", props)
   const [open, setOpen] = React.useState(false);
   const [productName, handleChange] = React.useState("Santa Rita Ranch South");
   const [quantity, handleQuantityChange] = React.useState(null);
