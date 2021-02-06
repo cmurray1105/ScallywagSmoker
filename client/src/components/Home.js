@@ -51,7 +51,8 @@ class Home extends Component {
         priceString += "0";
         console.log("STRING AGAIN", priceString);
       } else {
-        console.log("STRINGY STRING SWTRING", priceString.split(".")[1].slice(0,2))
+        priceString= priceString.split(".")[0] + '.' + priceString.split(".")[1].slice(0,2)
+        console.log("STRINGY STRING STRING,", priceString)
       }
     } else {
       priceString += ".00";
