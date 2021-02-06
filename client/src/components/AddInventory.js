@@ -260,6 +260,10 @@ console.log("CATS ARE CUTE", categories)
     </div>
   );
   console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
+
+  React.useEffect(()=>{
+    getCategories()
+  })
   return (
     <div>
         {/* <ThemeProvider theme={theme}> */}
