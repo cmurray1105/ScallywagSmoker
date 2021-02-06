@@ -189,7 +189,7 @@ console.log("CATS ARE CUTE", categories)
         }
 
       const createCategoryPulldown = ()=>{
-        console.log(categories)
+        console.log("CATS IN THE PULLDOWN", categories)
         let categoryList = []
         for (let categoryItem in categories){
 
