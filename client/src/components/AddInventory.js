@@ -19,7 +19,7 @@ export default function AddInventory(props) {
   const [productName, handleChange] = React.useState("Santa Rita Ranch South");
   const [customerName, handleNameChange] = React.useState("");
   const [streetAddress, handleStreetChange] = React.useState("");
-  const [startDate, setStartDate] = React.useState(new Date());
+  // const [startDate, setStartDate] = React.useState(new Date());
   const [email, handleEmailChange] = React.useState("");
   const [phone, handlePhoneChange] = React.useState(null);
   const [background, setBackground]= React.useState('red');
