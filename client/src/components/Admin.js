@@ -64,7 +64,7 @@ const Admin = (props) =>{
      } else if (categories[newValue] === 'inventory') {
       let displayPage = (
         <div>
-          <Inventory getCategories={getCategories}/>
+          <Inventory getCategories={props.getCategories}/>
         </div>
       )
       setPage(displayPage)
@@ -72,6 +72,7 @@ const Admin = (props) =>{
       setPage(null)
      }
   };
+
   return(
   <div >
   <div className={'admin-header'}>

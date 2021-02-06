@@ -15,6 +15,7 @@ const [inventory, setInventory] = React.useState([])
 React.useEffect(() => {
   // Update the document title using the browser API
   getInventory()
+  console.log("INV PROPS", props)
 }, []);
 
 const getInventory = () =>{
