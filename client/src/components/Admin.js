@@ -32,10 +32,8 @@ const Admin = (props) =>{
   const classes = useStyles();
 
   let categories = ['orders', 'inventory', 'completed orders']
-  const getCategories = () => {
-    axios.get("/categories").then((result) => {
-      return result.data});
-    };
+
+
   let mapTabs = categories.map((category) => {
     console.log(category);
     return (
@@ -53,6 +51,7 @@ const Admin = (props) =>{
   });
   console.log(props)
   const handleChange = (event, newValue) => {
+    // console.log("CAT DAT", getCategories())
     setValue(newValue);
     // props.getProducts(categories[newValue]);
      if (categories[newValue] === 'orders'){
@@ -65,7 +64,7 @@ const Admin = (props) =>{
      } else if (categories[newValue] === 'inventory') {
       let displayPage = (
         <div>
-          <Inventory getCategories={getCategories}/>
+          <Inventory />
         </div>
       )
       setPage(displayPage)

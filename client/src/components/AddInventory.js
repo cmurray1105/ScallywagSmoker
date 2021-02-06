@@ -2,24 +2,22 @@ import React from "react";
 import Button from '@material-ui/core/Button';
 import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-import * as emailjs from 'emailjs-com'
+// import * as emailjs from 'emailjs-com'
 // import DayPicker from 'react-day-picker';
 // import DayPickerInput from 'react-day-picker/DayPickerInput';
 // import 'react-day-picker/lib/style.css';
 
 
-emailjs.init("user_975JwJzPB6r4yxiDzOfHn");
-
 export default function AddInventory(props) {
 console.log("proppy props", props)
   const [open, setOpen] = React.useState(false);
   const [productName, handleChange] = React.useState("Santa Rita Ranch South");
-  const [quantity, handleQuantityChange] = React.useState(null);
+  const [quantity, handleQuantityChange] = React.useState(0);
   const [category, handleCategoryChange] = React.useState("");
-  const [categories, setCategories] = React.useState(props.getCategories())
+  const [categories, setCategories] = React.useState([])
   // const [startDate, setStartDate] = React.useState(new Date());
   const [imageUrl, handleImageChange] = React.useState("");
   const [price, handlePriceChange] = React.useState(null);
@@ -29,7 +27,7 @@ console.log("proppy props", props)
   const [subBackground, setSubBackground]= React.useState('red');
   const [subText, setSubTextColor] = React.useState('white')
   const [subBorder, setSubBorder] = React.useState('none')
-
+console.log("CATS ARE CUTE", categories)
   const handleEnter = ()=>{
     setBackground('white')
     setTextColor('red')
@@ -52,7 +50,14 @@ console.log("proppy props", props)
     setSubTextColor('white')
     setSubBorder('none')
   }
-
+  const getCategories = () => {
+    axios
+    .get("/categories")
+    .then((result) => {
+      console.log("CUTE CAT DATA", result.data)
+      setCategories(result.data)
+    });
+    };
 
   console.log("props", props)
   const useStyles = makeStyles((theme) => ({
@@ -184,13 +189,15 @@ console.log("proppy props", props)
         }
 
       const createCategoryPulldown = ()=>{
+        console.log(categories)
         let categoryList = []
         for (let categoryItem in categories){
-          categoryList.push(categoryItem.name)
+
+          categoryList.push( <option value={categoryItem.name}>{categoryItem.name}</option>)
         }
         return categoryList
       }
-
+      console.log(createCategoryPulldown)
 
   const body = (
     <div className={classes.paper}>
@@ -219,7 +226,7 @@ console.log("proppy props", props)
             name="Quantity"
             type="number"
             value={quantity}
-            onChange={this.handleQuantity} />
+            onChange={handleQuantityChange} />
           </label>
           <br />
           <label>
@@ -261,7 +268,7 @@ console.log("proppy props", props)
       onClick={handleOpen}
       onMouseEnter={handleEnter}
       onMouseLeave={handleExit}>
-      PROCEED TO CHECKOUT
+      Add an Item
       </button>
       {/* </ThemeProvider> */}
       <Modal

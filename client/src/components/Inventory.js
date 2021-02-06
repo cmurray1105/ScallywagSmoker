@@ -12,7 +12,7 @@ import AddInventory from './AddInventory'
 const Inventory = (props) =>{
 const [inventory, setInventory] = React.useState([])
 
-console.log("INV PROPS", propss)
+console.log("INV PROPS", props)
 React.useEffect(() => {
   // Update the document title using the browser API
   getInventory()
@@ -53,7 +53,7 @@ return(
         </Table>
       </TableContainer>
 </div>
-<AddInventory getCategories={props.categories} />
+<AddInventory />
 </div>
 )
 }
