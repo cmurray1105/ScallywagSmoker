@@ -17,11 +17,12 @@ export default function AddInventory(props) {
 
   const [open, setOpen] = React.useState(false);
   const [productName, handleChange] = React.useState("Santa Rita Ranch South");
-  const [customerName, handleNameChange] = React.useState("");
-  const [streetAddress, handleStreetChange] = React.useState("");
+  const [quantity, handleQuantityChange] = React.useState(null);
+  const [category, handleCategoryChange] = React.useState("");
+  const [categories, setCategories] = React.useState(props.getCategories())
   // const [startDate, setStartDate] = React.useState(new Date());
-  const [email, handleEmailChange] = React.useState("");
-  const [phone, handlePhoneChange] = React.useState(null);
+  const [imageUrl, handleImageChange] = React.useState("");
+  const [price, handlePriceChange] = React.useState(null);
   const [background, setBackground]= React.useState('red');
   const [textColor, setTextColor] = React.useState('white')
   const [border, setBorder] = React.useState('none')
@@ -150,55 +151,29 @@ export default function AddInventory(props) {
     axios
 .post("/addItem", {
         productName: productName,
-        quantity: streetAddress,
-        customerName: customerName,
-        deliveryDate: startDate,
-        cartItems: props.cartItems,
-        email: email,
-        phone: phone
+        quantity: quantity,
+        category: category,
+        price: price,
+        imageUrl: imageUrl,
       })
 
       .then((result) => {
-        let generateItemList = ()=> {
-          let productString= ''
-          let products = []
-          for (let item in props.cartItems){
-            products.push(item)
-          }
-          for (let i = 0; i < products.length; i++){
-            if (i === products.length-1){
-              productString += `${products[i]}`
-            } else {
-              productString += `${products[i]}, `
-            }
-          }
-          console.log(productString)
-          return productString
-      }
-        let templateParams = {
-          from_name: 'christopher.murray.bbqdev@gmail.com',
-          to_name: email,
-          customerName: customerName,
-          message_html: generateItemList()
-         }
-        emailjs.send(
-          'service_6gxzrwa',
-          'template_fu5eins',
-           templateParams,
-          'user_975JwJzPB6r4yxiDzOfHn'
-     )
-        for (let item in props.cartItems){
-          axios
-          .post('./updateQuantity', {quantity: (props.cartItems[item].originalQuantity - props.cartItems[item].quantity), productName: item}).then((result)=>{
-            // console.log("result of update", result)
-
-          })
-          .catch((err)=>{
-            console.log(err)
-          })
-        }
-          handleClose()
-          props.clearOrder()
+      //   let generateItemList = ()=> {
+      //     let productString= ''
+      //     let products = []
+      //     for (let item in props.cartItems){
+      //       products.push(item)
+      //     }
+      //     for (let i = 0; i < products.length; i++){
+      //       if (i === products.length-1){
+      //         productString += `${products[i]}`
+      //       } else {
+      //         productString += `${products[i]}, `
+      //       }
+      //     }
+      //     console.log(productString)
+      //     return productString
+      // }
 
       })
         .catch((err)=>{
@@ -208,9 +183,18 @@ export default function AddInventory(props) {
         })
         }
 
+      const createCategoryPulldown = ()=>{
+        let categoryList = []
+        for (let categoryItem in categories){
+          categoryList.push(categoryItem.name)
+        }
+        return categoryList
+      }
+
+
   const body = (
     <div className={classes.paper}>
-      <h2 id="simple-modal-title">Delivery Info</h2>
+      <h2 id="simple-modal-title">Add Product</h2>
       <h3>Total ${props.priceString}</h3>
       <div className="order-summary"></div>
       <div className="order-form">
@@ -229,50 +213,31 @@ export default function AddInventory(props) {
           </label>
           <br />
           <label>
-            Name:
+            Quantity:
             <br />
             <input
-              type="text"
-              value={customerName}
-              onChange={(e) => handleNameChange(e.target.value)}
-            />
+            name="Quantity"
+            type="number"
+            value={quantity}
+            onChange={this.handleQuantity} />
           </label>
           <br />
           <label>
-            Street Address:
+            Category:
             <br />
-            <input
-              type="text"
-              value={streetAddress}
-              onChange={(e) => handleStreetChange(e.target.value)}
-            />
+            <select onChange={(e) => handleCategoryChange(e.target.value)}>
+              {createCategoryPulldown() }
+            </select>
           </label>
           <br />
           <label>
-            Email Address:
+            price:
             <br />
             <input
               type="text"
-              value={email}
-              onChange={(e) => handleEmailChange(e.target.value)}
+              value={price}
+              onChange={(e) => handlePriceChange(e.target.value)}
             />
-          </label>
-          <br />
-          <label>
-            Phone:
-            <br />
-            <input
-              type="text"
-              value={phone}
-              onChange={(e) => handlePhoneChange(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            <br />
-
-
-            {/* <br/> */}
           </label>
           <br />
           <Button

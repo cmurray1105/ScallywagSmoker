@@ -3,7 +3,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { makeStyles } from "@material-ui/core/styles";
 import Orders from './Orders';
-import Inventory from './Inventory'
+import Inventory from './Inventory';
+import axios from 'axios';
 const Admin = (props) =>{
 
   const [value, setValue] = React.useState(0);
@@ -31,6 +32,10 @@ const Admin = (props) =>{
   const classes = useStyles();
 
   let categories = ['orders', 'inventory', 'completed orders']
+  const getCategories = () => {
+    axios.get("/categories").then((result) => {
+      return result.data});
+    };
   let mapTabs = categories.map((category) => {
     console.log(category);
     return (
@@ -59,7 +64,7 @@ const Admin = (props) =>{
      } else if (categories[newValue] === 'inventory') {
       let displayPage = (
         <div>
-          <Inventory />
+          <Inventory getCategories={getCategories}/>
         </div>
       )
       setPage(displayPage)

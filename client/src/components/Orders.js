@@ -42,6 +42,16 @@ class Orders extends React.Component {
         console.log(err);
       });
   }
+  getCategories = () => {
+    Axios.get("/categories").then((result) => {
+      console.log("CATEGORIES", result.data);
+      let cats = [];
+      for (let i = 0; i < result.data.length; i++) {
+        cats.push(result.data[i].name);
+      }
+      this.setState({ categories: cats });
+    });
+  };
 
 
 
