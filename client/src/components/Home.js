@@ -50,6 +50,8 @@ class Home extends Component {
         console.log("NEW STRING", priceString);
         priceString += "0";
         console.log("STRING AGAIN", priceString);
+      } else {
+        console.log("STRINGY STRING SWTRING", priceString.split(".")[1].slice(0,2))
       }
     } else {
       priceString += ".00";
