@@ -17,7 +17,7 @@ console.log("proppy props", props)
   const [productName, handleChange] = React.useState("Santa Rita Ranch South");
   const [quantity, handleQuantityChange] = React.useState(0);
   const [category, handleCategoryChange] = React.useState("");
-  const [categories, setCategories] = React.useState([])
+  const [categories, setCategories] = React.useState({})
   // const [startDate, setStartDate] = React.useState(new Date());
   const [imageUrl, handleImageChange] = React.useState("");
   const [price, handlePriceChange] = React.useState(null);
@@ -192,7 +192,7 @@ console.log("CATS ARE CUTE", categories)
         console.log("CATS IN THE PULLDOWN", categories)
         let categoryList = []
         for (let categoryItem in categories){
-
+console.log("CAT ITEM", categoryItem)
           categoryList.push( <option value={categoryItem.name}>{categoryItem.name}</option>)
         }
         return categoryList
