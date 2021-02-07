@@ -12,15 +12,53 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
+
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
       borderBottom: 'unset',
     },
   },
+  button: {
+    background: 'red',
+    color: 'white',
+    cursor: 'pointer',
+    fontWeight : 'bold',
+    outline: 'none',
+    // border: border,
+    borderRadius: 2,
+    // borderColor: textColor,
+    // border: border,
+    height: 48,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px  grey',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    bottom: 0
+  },
+  hovered: {
+    background: 'white',
+    color: 'red',
+    cursor: 'pointer',
+    fontWeight : 'bold',
+    outline: 'none',
+    // border: border,
+    borderRadius: 2,
+    // borderColor: textColor,
+    // border: border,
+    height: 48,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px  grey',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    bottom: 0
+  }
 });
 
 function InventoryRow(props) {
+  const [hovered, setHovered] = React.useState(false)
   const row = props.row
   console.log("ROW", row)
   const classes = useRowStyles();
@@ -35,10 +73,14 @@ function InventoryRow(props) {
   return (
 <>
 <TableRow className={classes.root}>
-<TableCell component="th" scope="row">{row.product_name}</TableCell>
+<TableCell align="right" component="th" scope="row">{row.product_name}</TableCell>
 <TableCell align="right">{row.quantity}</TableCell>
-<TableCell align="right">{row.price}</TableCell>
-<button onClick={()=>{
+<TableCell align="right">{props.convertPriceToString(row.price)}</TableCell>
+<button
+onMouseEnter={()=>{setHovered(true)}}
+onMouseLeave={()=>{setHovered(false)}}
+className={hovered ? classes.hovered : classes.button}
+onClick={()=>{
   console.log("ROW ROW ROW", row.id)
   deleteItem(row.id)}}>DELETE</button>
 </TableRow>

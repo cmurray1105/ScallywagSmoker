@@ -46,7 +46,7 @@ return(
           </TableHead>
           <TableBody>
             {inventory.map((row) => (
-              <InventoryRow row={row} getInventory={getInventory} />
+              <InventoryRow row={row} getInventory={getInventory} convertPriceToString={props.convertPriceToString}/>
             ))}
           </TableBody>
 
