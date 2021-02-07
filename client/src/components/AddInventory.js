@@ -157,39 +157,39 @@ console.log("CATS ARE CUTE", categories)
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("SUBMIT BEING HANDLED AND STUFF")
-    axios
-.post("/addItem", {
-        productName: productName,
-        quantity: quantity,
-        category: category,
-        price: price,
-        imageUrl: imageUrl,
-      })
+//     axios
+// .post("/addItem", {
+//         productName: productName,
+//         quantity: quantity,
+//         category: category,
+//         price: price,
+//         imageUrl: imageUrl,
+//       })
 
-      .then((result) => {
-      //   let generateItemList = ()=> {
-      //     let productString= ''
-      //     let products = []
-      //     for (let item in props.cartItems){
-      //       products.push(item)
-      //     }
-      //     for (let i = 0; i < products.length; i++){
-      //       if (i === products.length-1){
-      //         productString += `${products[i]}`
-      //       } else {
-      //         productString += `${products[i]}, `
-      //       }
-      //     }
-      //     console.log(productString)
-      //     return productString
-      // }
+//       .then((result) => {
+//       //   let generateItemList = ()=> {
+//       //     let productString= ''
+//       //     let products = []
+//       //     for (let item in props.cartItems){
+//       //       products.push(item)
+//       //     }
+//       //     for (let i = 0; i < products.length; i++){
+//       //       if (i === products.length-1){
+//       //         productString += `${products[i]}`
+//       //       } else {
+//       //         productString += `${products[i]}, `
+//       //       }
+//       //     }
+//       //     console.log(productString)
+//       //     return productString
+//       // }
 
-      })
-        .catch((err)=>{
-          if (err){
-            console.log(err);
-          }
-        })
+//       })
+//         .catch((err)=>{
+//           if (err){
+//             console.log(err);
+//           }
+//         })
         }
 
       const createCategoryPulldown = ()=>{
