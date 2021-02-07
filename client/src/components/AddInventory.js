@@ -17,7 +17,7 @@ console.log("proppy props", props)
   const [productName, handleChange] = React.useState("Santa Rita Ranch South");
   const [quantity, handleQuantityChange] = React.useState(0);
   const [category, handleCategoryChange] = React.useState("");
-  const [categories, setCategories] = React.useState({})
+  const [categories, setCategories] = React.useState([])
   // const [startDate, setStartDate] = React.useState(new Date());
   const [imageUrl, handleImageChange] = React.useState("");
   const [price, handlePriceChange] = React.useState(null);
@@ -50,14 +50,15 @@ console.log("CATS ARE CUTE", categories)
     setSubTextColor('white')
     setSubBorder('none')
   }
-  const getCategories = () => {
-    axios
-    .get("/categories")
-    .then((result) => {
-      console.log("CUTE CAT DATA", result.data)
-      setCategories(result.data)
-    });
-    };
+  // const getCategories = () => {
+  //   axios
+  //   .get("/categories")
+  //   .then((result) => {
+  //     console.log("CUTE CAT DATA", result.data)
+  //     setCategories(result.data)
+  //     console.log("CAT DATA SET AS CAT", categories)
+  //   });
+  //   };
 
   console.log("props", props)
   const useStyles = makeStyles((theme) => ({
@@ -189,15 +190,15 @@ console.log("CATS ARE CUTE", categories)
         }
 
       const createCategoryPulldown = ()=>{
-        console.log("CATS IN THE PULLDOWN", categories)
+        console.log("CATS IN THE PULLDOWN", props.categories)
         let categoryList = []
-        for (let categoryItem in categories){
-console.log("CAT ITEM", categoryItem)
-          categoryList.push( <option value={categoryItem.name}>{categoryItem.name}</option>)
+        for (let i = 0; i < props.categories.length; i++){
+console.log("CAT ITEM", props.categories[i].name)
+          categoryList.push( <option value={props.categories[i].name}>{props.categories[i].name}</option>)
         }
         return categoryList
       }
-      console.log(createCategoryPulldown)
+      // console.log()
 
   const body = (
     <div className={classes.paper}>
@@ -233,7 +234,7 @@ console.log("CAT ITEM", categoryItem)
             Category:
             <br />
             <select onChange={(e) => handleCategoryChange(e.target.value)}>
-              {createCategoryPulldown() }
+              {createCategoryPulldown()}
             </select>
           </label>
           <br />
@@ -261,9 +262,7 @@ console.log("CAT ITEM", categoryItem)
   );
   console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
 
-  React.useEffect(()=>{
-    getCategories()
-  })
+
   return (
     <div>
         {/* <ThemeProvider theme={theme}> */}
@@ -272,7 +271,7 @@ console.log("CAT ITEM", categoryItem)
       onClick={handleOpen}
       onMouseEnter={handleEnter}
       onMouseLeave={handleExit}>
-      Add an Item
+      ADD AN ITEM
       </button>
       {/* </ThemeProvider> */}
       <Modal

@@ -6,7 +6,7 @@ import Orders from './Orders';
 import Inventory from './Inventory';
 import axios from 'axios';
 const Admin = (props) =>{
-
+  const [prodCategories, setCategories] = React.useState([])
   const [value, setValue] = React.useState(0);
   const [currentPage, setPage] = React.useState((
   <div>
@@ -32,18 +32,19 @@ const Admin = (props) =>{
   const classes = useStyles();
 
   let categories = ['orders', 'inventory', 'completed orders']
-
+  const getCategories = () => {
+    axios
+    .get("/categories")
+    .then((result) => {
+      console.log("CUTE CAT DATA", result.data)
+      setCategories(result.data)
+    });
+    };
 
   let mapTabs = categories.map((category) => {
     console.log(category);
     return (
       <Tab
-        // onMouseEnter={() => {
-        //   handleHover(category);
-        // }}
-        // onMouseLeave={() => {
-        //   handleExit();
-        // }}
         className={classes.paper}
         label={category}
       ></Tab>
@@ -51,7 +52,7 @@ const Admin = (props) =>{
   });
   console.log(props)
   const handleChange = (event, newValue) => {
-    // console.log("CAT DAT", getCategories())
+    console.log("CAT DAT", getCategories())
     setValue(newValue);
     // props.getProducts(categories[newValue]);
      if (categories[newValue] === 'orders'){
@@ -64,7 +65,7 @@ const Admin = (props) =>{
      } else if (categories[newValue] === 'inventory') {
       let displayPage = (
         <div>
-          <Inventory />
+          <Inventory categories={prodCategories} getCategories={getCategories}/>
         </div>
       )
       setPage(displayPage)
@@ -72,6 +73,10 @@ const Admin = (props) =>{
       setPage(null)
      }
   };
+
+  React.useEffect(()=>{
+    getCategories()
+  },[])
 
   return(
   <div >

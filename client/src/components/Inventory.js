@@ -53,7 +53,7 @@ return(
         </Table>
       </TableContainer>
 </div>
-<AddInventory />
+<AddInventory getCategories={props.getCategories} categories={props.categories}/>
 </div>
 )
 }
