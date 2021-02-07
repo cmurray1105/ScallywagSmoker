@@ -53,7 +53,12 @@ return(
         </Table>
       </TableContainer>
 </div>
-<AddInventory getCategories={props.getCategories} categories={props.categories}/>
+<AddInventory
+          singleFileUploadHandler={props.singleFileUploadHandler}
+          setSelectedFile={props.setSelectedFile}
+          selectedFile={props.selectedFile}
+          getCategories={props.getCategories}
+          categories={props.categories}/>
 </div>
 )
 }

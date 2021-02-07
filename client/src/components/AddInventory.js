@@ -150,6 +150,9 @@ console.log("CATS ARE CUTE", categories)
   const handleClose = () => {
     setOpen(false);
   };
+  // ******************************
+
+  // ******************************
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -203,22 +206,14 @@ console.log("CAT ITEM", props.categories[i].name)
   const body = (
     <div className={classes.paper}>
       <h2 id="simple-modal-title">Add Product</h2>
-      <h3>Total ${props.priceString}</h3>
       <div className="order-summary"></div>
       <div className="order-form">
         <form onSubmit={handleSubmit}>
           <label>
             Product Name:
             <br />
-            <select
-              value={productName}
-              onChange={(e) => handleChange(e.target.value)}
-            >
-              <option value="Santa Rita Ranch South">Santa Rita Ranch South</option>
-              <option value="Santa Rita Ranch North">Santa Rita Ranch North</option>
-              <option value="Morningstar">Morningstar</option>
-            </select>
-          </label>
+            <input type="text" value={productName} onChange={(e)=>handleChange(e.target.value)} />
+        </label>
           <br />
           <label>
             Quantity:
@@ -227,7 +222,8 @@ console.log("CAT ITEM", props.categories[i].name)
             name="Quantity"
             type="number"
             value={quantity}
-            onChange={handleQuantityChange} />
+            onChange={(e)=> handleQuantityChange(e.target.value)} />
+
           </label>
           <br />
           <label>
@@ -236,10 +232,13 @@ console.log("CAT ITEM", props.categories[i].name)
             <select onChange={(e) => handleCategoryChange(e.target.value)}>
               {createCategoryPulldown()}
             </select>
+            <button>
+              Add A Category
+            </button>
           </label>
           <br />
           <label>
-            price:
+            Price:
             <br />
             <input
               type="text"
@@ -247,6 +246,36 @@ console.log("CAT ITEM", props.categories[i].name)
               onChange={(e) => handlePriceChange(e.target.value)}
             />
           </label>
+          {/* ************************* */}
+           <label>
+          { /*  Image:
+            <input type="file" onChange={(e)=>{
+              console.log("FILE:", e.target.files[0])
+              props.setSelectedFile(e.target.files[0])
+              props.singleFileUploadHandler(e)}}
+
+              /> */}
+
+              <div className="card border-light mb-3 mt-5" style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}>
+      <div className="card-header">
+       <h3 style={{ color: '#555', marginLeft: '12px' }}>Single Image Upload</h3>
+       <p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 250px x 250px ( Max 2MB )</p>
+      </div>
+      <div className="card-body">
+       <p className="card-text">Please upload an image for your profile</p>
+       <input type="file" onChange={props.singleFileChangedHandler}/>
+       <div className="mt-5">
+        <button className="btn btn-info" onClick={props.singleFileUploadHandler}>Upload!</button>
+       </div>
+      </div>
+     </div>
+
+          {/* <button className="btn btn-info" onClick={props.singleFileUploadHandler}>Upload!</button> */}
+          </label>
+                 {/* ************************* */}
+                        {/* ************************* */}
+                               {/* ************************* */}
+                                      {/* ************************* */}
           <br />
           <Button
           className={classes.submitButton}
@@ -260,7 +289,6 @@ console.log("CAT ITEM", props.categories[i].name)
       </div>
     </div>
   );
-  console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
 
 
   return (

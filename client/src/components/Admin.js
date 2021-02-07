@@ -8,6 +8,7 @@ import axios from 'axios';
 const Admin = (props) =>{
   const [prodCategories, setCategories] = React.useState([])
   const [value, setValue] = React.useState(0);
+  const [selectedFile, setSelectedFile] = React.useState(null)
   const [currentPage, setPage] = React.useState((
   <div>
       <Orders />
@@ -50,7 +51,106 @@ const Admin = (props) =>{
       ></Tab>
     );
   });
-  console.log(props)
+
+  React.useEffect(()=>{
+    getCategories()
+  },[])
+
+
+  const handleUpload = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    data.append("file", selectedFile, )
+  }
+  // const singleFileUploadHandler = () => {
+  //   event.preventDefault();
+  //   const data = new FormData();
+  // // If file selected
+  //   if (selectedFile) {
+  // data.append( 'file', selectedFile, selectedFile.name );
+  // axios.post( '/upload', data)
+  // .then((result)=>{
+  //   console.log(result)
+  // }).catch((err)=>{
+  //   console.log("ERR!!!!!", err)
+  // })
+  //   }
+  // }
+      // headers: {
+      //  'accept': 'application/json',
+      //  'Accept-Language': 'en-US,en;q=0.8',
+      //  'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+      // }
+  //     .then( ( response ) => {
+  // if ( 200 === response.status ) {
+  //       // If file size is larger than expected.
+  //       if( response.data.error ) {
+  //        if ( 'LIMIT_FILE_SIZE' === response.data.error.code ) {
+  //         console.log( 'Max size: 2MB', 'red' );
+  //        } else {
+  //         console.log( response.data );
+  // // If not the given file type
+  //         console.log( response.data.error, 'red' );
+  //        }
+  //       } else {
+  //        // Success
+  //        let fileName = response.data;
+  //        console.log( 'fileName', fileName );
+  //        console.log( 'File Uploaded', '#3089cf' );
+  //       }
+  //      }
+  //     }).catch( ( error ) => {
+  //     // If another error
+  //     console.log( error, 'red' );
+  //    });
+  //   } else {
+  //    // if file not selected throw error
+  //   console.log( 'Please upload file', 'red' );
+  //   }
+  // };
+const  singleFileChangedHandler = ( event ) => {
+    setSelectedFile(event.target.files[0])
+    };
+
+  const singleFileUploadHandler = (  ) => {
+    const data = new FormData();
+  // If file selected
+    if (selectedFile) {
+  data.append( 'profileImage', selectedFile, selectedFile.name );
+  axios.post( '/profile-img-upload', data, {
+      headers: {
+       'accept': 'application/json',
+       'Accept-Language': 'en-US,en;q=0.8',
+       'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+      }
+     })
+      .then( ( response ) => {
+  if ( 200 === response.status ) {
+        // If file size is larger than expected.
+        if( response.data.error ) {
+         if ( 'LIMIT_FILE_SIZE' === response.data.error.code ) {
+          console.log( 'Max size: 2MB', 'red' );
+         } else {
+          console.log( response.data );
+  // If not the given file type
+          console.log( response.data.error, 'red' );
+         }
+        } else {
+         // Success
+         let fileName = response.data;
+         console.log( 'fileName', fileName );
+         console.log( 'File Uploaded', '#3089cf' );
+        }
+       }
+      }).catch( ( error ) => {
+      // If another error
+      console.log( error, 'red' );
+     });
+    } else {
+     // if file not selected throw error
+     console.log( 'Please upload file', 'red' );
+    }
+  }
   const handleChange = (event, newValue) => {
     console.log("CAT DAT", getCategories())
     setValue(newValue);
@@ -65,7 +165,13 @@ const Admin = (props) =>{
      } else if (categories[newValue] === 'inventory') {
       let displayPage = (
         <div>
-          <Inventory categories={prodCategories} getCategories={getCategories}/>
+          <Inventory
+          singleFileChangedHandler={singleFileChangedHandler}
+          singleFileUploadHandler={singleFileUploadHandler}
+          setSelectedFile={setSelectedFile}
+          selectedFile={selectedFile}
+          categories={prodCategories}
+          getCategories={getCategories}/>
         </div>
       )
       setPage(displayPage)
@@ -73,10 +179,6 @@ const Admin = (props) =>{
       setPage(null)
      }
   };
-
-  React.useEffect(()=>{
-    getCategories()
-  },[])
 
   return(
   <div >
@@ -97,5 +199,5 @@ const Admin = (props) =>{
       </div>
   </div>
   )
-}
+  }
 export default Admin;
