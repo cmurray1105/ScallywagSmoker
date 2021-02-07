@@ -5,3 +5,5 @@
 !.elasticbeanstalk/*.global.yml
 
 secret.js
+.env
+superDiscreet.js

@@ -14,9 +14,9 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function AddInventory(props) {
 console.log("proppy props", props)
   const [open, setOpen] = React.useState(false);
-  const [productName, handleChange] = React.useState("Santa Rita Ranch South");
+  const [productName, handleChange] = React.useState("");
   const [quantity, handleQuantityChange] = React.useState(0);
-  const [category, handleCategoryChange] = React.useState("");
+  const [category, handleCategoryChange] = React.useState("Meats");
   const [categories, setCategories] = React.useState([])
   // const [startDate, setStartDate] = React.useState(new Date());
   const [imageUrl, handleImageChange] = React.useState("");
@@ -27,6 +27,17 @@ console.log("proppy props", props)
   const [subBackground, setSubBackground]= React.useState('red');
   const [subText, setSubTextColor] = React.useState('white')
   const [subBorder, setSubBorder] = React.useState('none')
+  const [selectedFile, setSelectedFile] = React.useState(null)
+  const [fileSelected, setFileSelected] = React.useState(false)
+
+  const  singleFileChangedHandler = ( event ) => {
+    console.log("EVENT TARGETY THING", event.target.files[0])
+    let fileToUpload = event.target.files[0]
+    setSelectedFile(fileToUpload)
+      console.log("selected file after being selected", fileToUpload, selectedFile)
+      setFileSelected(true)
+      };
+
 console.log("CATS ARE CUTE", categories)
   const handleEnter = ()=>{
     setBackground('white')
@@ -114,6 +125,47 @@ console.log("CATS ARE CUTE", categories)
     }
   }));
 
+  const singleFileUploadHandler = (selectedFile) => {
+    const data = new FormData();
+  // If file selected
+    if (selectedFile) {
+  data.append( 'profileImage', selectedFile, selectedFile.name );
+  axios.post( '/profile-img-upload', data, {
+      headers: {
+       'accept': 'application/json',
+       'Accept-Language': 'en-US,en;q=0.8',
+       'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+      }
+     })
+      .then( ( response ) => {
+  if ( 200 === response.status ) {
+        // If file size is larger than expected.
+        if( response.data.error ) {
+         if ( 'LIMIT_FILE_SIZE' === response.data.error.code ) {
+          console.log( 'Max size: 2MB', 'red' );
+         } else {
+          console.log( response.data );
+  // If not the given file type
+          console.log( response.data.error, 'red' );
+         }
+        } else {
+         // Success
+         let fileName = response.data;
+         console.log( 'fileName', fileName );
+         handleImageChange(fileName.location)
+         console.log( 'File Uploaded', '#3089cf' );
+        }
+       }
+      }).catch( ( error ) => {
+      // If another error
+      console.log( error, 'red' );
+     });
+    } else {
+     // if file not selected throw error
+     console.log( 'Please upload file', 'red', selectedFile );
+    }
+  }
+
   // const theme = createMuiTheme({
   //   overrides: {
   //     // Style sheet name ⚛️
@@ -156,15 +208,15 @@ console.log("CATS ARE CUTE", categories)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("SUBMIT BEING HANDLED AND STUFF")
-//     axios
-// .post("/addItem", {
-//         productName: productName,
-//         quantity: quantity,
-//         category: category,
-//         price: price,
-//         imageUrl: imageUrl,
-//       })
+    console.log(productName, category, quantity, price, imageUrl)
+    axios
+.post("/addItem", {
+        productName: productName,
+        category: category,
+        quantity: quantity,
+        imageUrl: imageUrl,
+        price: price,
+      })
 
 //       .then((result) => {
 //       //   let generateItemList = ()=> {
@@ -232,9 +284,9 @@ console.log("CAT ITEM", props.categories[i].name)
             <select onChange={(e) => handleCategoryChange(e.target.value)}>
               {createCategoryPulldown()}
             </select>
-            <button>
+            {/* <button>
               Add A Category
-            </button>
+            </button> */}
           </label>
           <br />
           <label>
@@ -263,9 +315,11 @@ console.log("CAT ITEM", props.categories[i].name)
       </div>
       <div className="card-body">
        <p className="card-text">Please upload an image for your profile</p>
-       <input type="file" onChange={props.singleFileChangedHandler}/>
+       <input type="file" onChange={(event) => {
+         console.log("FILESSSS", event.files)
+         singleFileChangedHandler(event)}}/>
        <div className="mt-5">
-        <button className="btn btn-info" onClick={props.singleFileUploadHandler}>Upload!</button>
+        <button className="btn btn-info" onClick={()=>{singleFileUploadHandler(selectedFile)}}>Upload!</button>
        </div>
       </div>
      </div>

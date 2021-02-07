@@ -11,6 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
@@ -23,12 +24,21 @@ function InventoryRow(props) {
   const row = props.row
   console.log("ROW", row)
   const classes = useRowStyles();
+  const deleteItem = (id)=>{
+    axios.delete('/inventory', { data: id })
+    .then((result=>{
+      console.log("INV DELETE", result)
+    }))
+  }
   return (
 <>
 <TableRow className={classes.root}>
 <TableCell component="th" scope="row">{row.product_name}</TableCell>
 <TableCell align="right">{row.quantity}</TableCell>
 <TableCell align="right">{row.price}</TableCell>
+<button onClick={()=>{
+  console.log("ROW ROW ROW", row.id)
+  deleteItem(row.id)}}>DELETE</button>
 </TableRow>
 </>
   )

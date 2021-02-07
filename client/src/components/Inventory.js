@@ -54,9 +54,10 @@ return(
       </TableContainer>
 </div>
 <AddInventory
-          singleFileUploadHandler={props.singleFileUploadHandler}
-          setSelectedFile={props.setSelectedFile}
-          selectedFile={props.selectedFile}
+          // singleFileUploadHandler={props.singleFileUploadHandler}
+          // singleFileChangedHandler={props.singleFileChangedHandler}
+          // setSelectedFile={props.setSelectedFile}
+          // selectedFile={props.selectedFile}
           getCategories={props.getCategories}
           categories={props.categories}/>
 </div>

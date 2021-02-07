@@ -87,5 +87,26 @@ const getInventory = (cb)=>{
     }
   })
 }
+const addInventoryItem = (item, cb)=>{
+  connection.query("INSERT INTO product (product_name, category, quantity, image_url, price) VALUES (?, ?, ?, ?, ?)", item, (err, result)=>{
+    if (err){
+      cb(err, null)
+    }else{
+      cb(null, result)
+    }
+  })
+}
 
-module.exports ={getProducts, getOrders, addDelivery, addItemToOrder, updateQuantity, getCategories, getInventory}
+// let id = [5]
+const removeInventoryItem = (id, cb)=>{
+  console.log("id", id)
+  connection.query("DELETE FROM `product` WHERE id = ?", id, (err, result)=>{
+    if (err){
+      cb(err, null)
+    }else{
+      cb(null, result)
+    }
+  })
+}
+
+module.exports ={removeInventoryItem, addInventoryItem, getProducts, getOrders, addDelivery, addItemToOrder, updateQuantity, getCategories, getInventory}
