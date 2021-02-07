@@ -246,13 +246,14 @@ app.post('/addItem', function (req, res) {
   });
 });
 app["delete"]('/inventory', function (req, res) {
-  console.log(req);
+  console.log(req.body);
   var id = [req.body.id];
 
   _queries["default"].removeInventoryItem(id, function (err, result) {
     if (err) {
       console.log(err);
     } else {
+      console.log(result);
       res.send(result);
     }
   }); // res.send('Got a DELETE request at /user')

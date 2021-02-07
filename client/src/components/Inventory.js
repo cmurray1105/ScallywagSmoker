@@ -46,7 +46,7 @@ return(
           </TableHead>
           <TableBody>
             {inventory.map((row) => (
-              <InventoryRow row={row} />
+              <InventoryRow row={row} getInventory={getInventory} />
             ))}
           </TableBody>
 
@@ -58,8 +58,10 @@ return(
           // singleFileChangedHandler={props.singleFileChangedHandler}
           // setSelectedFile={props.setSelectedFile}
           // selectedFile={props.selectedFile}
+          getInventory={getInventory}
           getCategories={props.getCategories}
           categories={props.categories}/>
+
 </div>
 )
 }

@@ -35,7 +35,8 @@ console.log("proppy props", props)
     let fileToUpload = event.target.files[0]
     setSelectedFile(fileToUpload)
       console.log("selected file after being selected", fileToUpload, selectedFile)
-      setFileSelected(true)
+      // setFileSelected(true)
+    singleFileUploadHandler(fileToUpload)
       };
 
 console.log("CATS ARE CUTE", categories)
@@ -208,6 +209,7 @@ console.log("CATS ARE CUTE", categories)
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // event.preventDefault();
     console.log(productName, category, quantity, price, imageUrl)
     axios
 .post("/addItem", {
@@ -216,6 +218,14 @@ console.log("CATS ARE CUTE", categories)
         quantity: quantity,
         imageUrl: imageUrl,
         price: price,
+      }).then((result)=>{
+        handleChange("")
+        handleCategoryChange('Meats')
+        handleQuantityChange(0)
+        handleImageChange("")
+        handlePriceChange(null)
+        props.getInventory()
+        handleClose()
       })
 
 //       .then((result) => {
@@ -260,7 +270,7 @@ console.log("CAT ITEM", props.categories[i].name)
       <h2 id="simple-modal-title">Add Product</h2>
       <div className="order-summary"></div>
       <div className="order-form">
-        <form onSubmit={handleSubmit}>
+        <form>
           <label>
             Product Name:
             <br />
@@ -308,21 +318,12 @@ console.log("CAT ITEM", props.categories[i].name)
 
               /> */}
 
-              <div className="card border-light mb-3 mt-5" style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}>
-      <div className="card-header">
-       <h3 style={{ color: '#555', marginLeft: '12px' }}>Single Image Upload</h3>
-       <p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 250px x 250px ( Max 2MB )</p>
-      </div>
-      <div className="card-body">
-       <p className="card-text">Please upload an image for your profile</p>
+       <p className="card-text">Please upload an image</p>
        <input type="file" onChange={(event) => {
          console.log("FILESSSS", event.files)
          singleFileChangedHandler(event)}}/>
        <div className="mt-5">
-        <button className="btn btn-info" onClick={()=>{singleFileUploadHandler(selectedFile)}}>Upload!</button>
        </div>
-      </div>
-     </div>
 
           {/* <button className="btn btn-info" onClick={props.singleFileUploadHandler}>Upload!</button> */}
           </label>
@@ -337,6 +338,7 @@ console.log("CAT ITEM", props.categories[i].name)
           value="Submit"
           onMouseEnter={()=>{handleSubEnter()}}
           onMouseLeave={()=>{handleSubExit()}}
+          onClick={(event)=>{handleSubmit(event)}}
           >Add Item
           </Button>
         </form>

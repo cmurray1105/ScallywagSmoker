@@ -25,10 +25,12 @@ function InventoryRow(props) {
   console.log("ROW", row)
   const classes = useRowStyles();
   const deleteItem = (id)=>{
-    axios.delete('/inventory', { data: id })
+    axios.delete('/inventory', { data: {id: id}})
     .then((result=>{
       console.log("INV DELETE", result)
-    }))
+      props.getInventory()
+    }
+    ))
   }
   return (
 <>

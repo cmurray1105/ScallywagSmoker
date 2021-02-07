@@ -247,12 +247,13 @@ app.post( '/profile-img-upload', ( req, res ) => {
   })
 
   app.delete('/inventory', function (req, res) {
-    console.log(req)
+    console.log(req.body)
     let id = [req.body.id]
     db.removeInventoryItem(id, (err, result)=>{
       if (err){
         console.log(err)
       }else{
+        console.log(result)
         res.send(result)
       }
     });
