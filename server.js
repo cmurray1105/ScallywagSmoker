@@ -257,27 +257,8 @@ app.post( '/profile-img-upload', ( req, res ) => {
         res.send(result)
       }
     });
-    // res.send('Got a DELETE request at /user')
   })
   // End of single profile upload
-
-
-    // s3bucket.upload(params, function(err, data) {
-    //   if (err) {
-    //     res.status(500).json({ error: true, Message: err });
-    //   } else {
-    //     res.send({ data });
-    //     var newFileUploaded = {
-    //       description: req.body.description,
-    //       fileLink: s3FileURL + file.originalname,
-    //       s3_key: params.Key
-    //     };
-        // var document = new DOCUMENT(newFileUploaded);
-        // document.save(function(error, newFile) {
-        //   if (error) {
-        //     throw error;
-        //   }
-        // });
 
 app.listen(PORT, () => {
   console.log(`Server listening at port ${PORT}. cwm`);

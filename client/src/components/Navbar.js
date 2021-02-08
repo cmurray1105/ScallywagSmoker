@@ -81,7 +81,6 @@ function Navbar(props) {
     console.log("ANCHORS AWAY!", anchorEl);
     setOpen(!open);
   };
-
   let items = [];
   for (let order in props.cartItems) {
     items.push(props.cartItems[order]);
@@ -97,10 +96,17 @@ function Navbar(props) {
     // console.log("WHAT AN ITEM LOOKS LIKE",
     total = total + ((props.cartItems[item].price) * props.cartItems[item].quantity)
   }
-
+  const handleClickAway = (event) => {
+    if (open){
+    handleAnchor(null)
+    setOpen(false);
+    }
+  };
 
   return (
-    // <ClickAwayListener onClickAway={handleClickAway}>
+    <ClickAwayListener
+
+    onClickAway={handleClickAway}>
     <div>
       <div className={classes.buttonContainer}>
         <button className={classes.button} onClick={handleClick}>
@@ -174,7 +180,7 @@ function Navbar(props) {
         </div>
       </CartPopper>
     </div>
-    // </ClickAwayListener>
+    </ClickAwayListener>
   );
 }
 export default Navbar;

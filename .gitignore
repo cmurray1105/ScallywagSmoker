@@ -7,3 +7,4 @@
 secret.js
 .env
 superDiscreet.js
+db/secret.js
