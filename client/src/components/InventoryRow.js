@@ -76,6 +76,7 @@ function InventoryRow(props) {
 <TableCell align="right" component="th" scope="row">{row.product_name}</TableCell>
 <TableCell align="right">{row.quantity}</TableCell>
 <TableCell align="right">${props.convertPriceToString(row.price)}</TableCell>
+<TableCell align="right">${row.category}</TableCell>
 <button
 onMouseEnter={()=>{setHovered(true)}}
 onMouseLeave={()=>{setHovered(false)}}

@@ -42,6 +42,7 @@ return(
               <TableCell align="right">Quantity</TableCell>
               <TableCell align="right">Price
               </TableCell>
+              <TableCell align="right">Category</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
