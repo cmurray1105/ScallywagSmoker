@@ -1,13 +1,12 @@
 import path from "path";
 import express from "express";
+const router = express.Router();
 require("dotenv").config();
 import db from "./db/queries";
 const multerS3 = require( 'multer-s3' );
 const multer = require('multer');
 const url = require('url');
 const AWS = require("aws-sdk");
-
-console.log("ENV", process.env.BUCKET, process.env.ACCESS_KEY, process.env.SECRET )
 const s3 = new AWS.S3({
   accessKeyId: process.env.ACCESS_KEY,
   secretAccessKey: process.env.SECRET,
@@ -49,7 +48,9 @@ const bodyParser = require("body-parser");
 const PORT = process.env.HTTP_PORT || 8080;
 const app = express();
 
-app.use(express.static(path.join(__dirname, "client", "build")));
+app.use('/', express.static(path.join(__dirname, "client", "build")));
+
+console.log(path.join(__dirname, "client", "build"))
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {

@@ -8,6 +8,8 @@ var _queries = _interopRequireDefault(require("./db/queries"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+var router = _express["default"].Router();
+
 require("dotenv").config();
 
 var multerS3 = require('multer-s3');
@@ -18,7 +20,6 @@ var url = require('url');
 
 var AWS = require("aws-sdk");
 
-console.log("ENV", process.env.BUCKET, process.env.ACCESS_KEY, process.env.SECRET);
 var s3 = new AWS.S3({
   accessKeyId: process.env.ACCESS_KEY,
   secretAccessKey: process.env.SECRET,
@@ -63,7 +64,8 @@ var bodyParser = require("body-parser");
 
 var PORT = process.env.HTTP_PORT || 8080;
 var app = (0, _express["default"])();
-app.use(_express["default"]["static"](_path["default"].join(__dirname, "client", "build")));
+app.use('/', _express["default"]["static"](_path["default"].join(__dirname, "client", "build")));
+console.log(_path["default"].join(__dirname, "client", "build"));
 app.use(bodyParser.json());
 app.get("/", function (req, res) {
   res.send("just gonna send it");
@@ -256,25 +258,8 @@ app["delete"]('/inventory', function (req, res) {
       console.log(result);
       res.send(result);
     }
-  }); // res.send('Got a DELETE request at /user')
-
+  });
 }); // End of single profile upload
-// s3bucket.upload(params, function(err, data) {
-//   if (err) {
-//     res.status(500).json({ error: true, Message: err });
-//   } else {
-//     res.send({ data });
-//     var newFileUploaded = {
-//       description: req.body.description,
-//       fileLink: s3FileURL + file.originalname,
-//       s3_key: params.Key
-//     };
-// var document = new DOCUMENT(newFileUploaded);
-// document.save(function(error, newFile) {
-//   if (error) {
-//     throw error;
-//   }
-// });
 
 app.listen(PORT, function () {
   console.log("Server listening at port ".concat(PORT, ". cwm"));
