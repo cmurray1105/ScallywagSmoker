@@ -67,22 +67,22 @@ export default function LogInModal(props) {
       borderRadius: '5%'
     },
     button: {
-      background: background,
-      color: textColor,
+      // background: background,
+      // color: textColor,
       cursor: 'pointer',
-      fontWeight : 'bold',
-      outline: 'none',
+      // fontWeight : 'bold',
+      // outline: 'none',
+      // // border: border,
+      // borderRadius: 2,
+      // // borderColor: textColor,
       // border: border,
-      borderRadius: 2,
-      // borderColor: textColor,
-      border: border,
-      height: 48,
-      padding: '0 30px',
-      boxShadow: '0 3px 5px 2px  grey',
-      display: 'block',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      bottom: 0
+      // height: 48,
+      // padding: '0 30px',
+      // boxShadow: '0 3px 5px 2px  grey',
+      // display: 'block',
+      // marginLeft: 'auto',
+      // marginRight: 'auto',
+      // bottom: 0
     },
     submitButton: {
       background: subBackground,
@@ -144,69 +144,69 @@ export default function LogInModal(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("SUBMIT BEING HANDLED AND STUFF")
-    axios
-.post("/addOrder", {
-        address: streetAddress,
-        customerName: customerName,
-        deliveryDate: startDate,
-        neighborhood: neighborhood,
-        cartItems: props.cartItems,
-        email: email,
-        phone: phone
-      })
+//     axios
+// .post("/addOrder", {
+//         address: streetAddress,
+//         customerName: customerName,
+//         deliveryDate: startDate,
+//         neighborhood: neighborhood,
+//         cartItems: props.cartItems,
+//         email: email,
+//         phone: phone
+//       })
 
-      .then((result) => {
-        let generateItemList = ()=> {
-          let productString= ''
-          let products = []
-          for (let item in props.cartItems){
-            products.push(item)
-          }
-          for (let i = 0; i < products.length; i++){
-            if (i === products.length-1){
-              productString += `${products[i]}`
-            } else {
-              productString += `${products[i]}, `
-            }
-          }
-          console.log(productString)
-          return productString
-      }
-        let templateParams = {
-          from_name: 'christopher.murray.bbqdev@gmail.com',
-          to_name: email,
-          customerName: customerName,
-          message_html: generateItemList()
-         }
-        emailjs.send(
-          'service_6gxzrwa',
-          'template_fu5eins',
-           templateParams,
-          'user_975JwJzPB6r4yxiDzOfHn'
-     )
-        for (let item in props.cartItems){
-          axios
-          .post('./updateQuantity', {quantity: (props.cartItems[item].originalQuantity - props.cartItems[item].quantity), productName: item}).then((result)=>{
-            // console.log("result of update", result)
+      // .then((result) => {
+      //   let generateItemList = ()=> {
+      //     let productString= ''
+      //     let products = []
+      //     for (let item in props.cartItems){
+      //       products.push(item)
+      //     }
+      //     for (let i = 0; i < products.length; i++){
+      //       if (i === products.length-1){
+      //         productString += `${products[i]}`
+      //       } else {
+      //         productString += `${products[i]}, `
+      //       }
+      //     }
+      //     console.log(productString)
+      //     return productString
+      // }
+        // let templateParams = {
+        //   from_name: 'christopher.murray.bbqdev@gmail.com',
+        //   to_name: email,
+        //   customerName: customerName,
+        //   message_html: generateItemList()
+        //  }
+    //     emailjs.send(
+    //       'service_6gxzrwa',
+    //       'template_fu5eins',
+    //        templateParams,
+    //       'user_975JwJzPB6r4yxiDzOfHn'
+    //  )
+        // for (let item in props.cartItems){
+        //   axios
+        //   .post('./updateQuantity', {quantity: (props.cartItems[item].originalQuantity - props.cartItems[item].quantity), productName: item}).then((result)=>{
+        //     // console.log("result of update", result)
 
-          })
-          .catch((err)=>{
-            console.log(err)
-          })
-        }
+        //   })
+        //   .catch((err)=>{
+        //     console.log(err)
+        //   })
+        // }
           handleClose()
-          props.clearOrder()
+  }
+      //     props.clearOrder()
 
-      })
-        .catch((err)=>{
-          if (err){
-            console.log(err);
-          }
-        })
-        }
+      // })
+      //   .catch((err)=>{
+      //     if (err){
+      //       console.log(err);
+      //     }
+      //   })
+      //   }
 
   const body = (
-    <div></div>
     <div className={classes.paper}>
       <h2 id="simple-modal-title">Delivery Info</h2>
       <h3>Total ${props.priceString}</h3>
@@ -269,18 +269,6 @@ export default function LogInModal(props) {
           <label>
             Delivery Date
             <br />
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              minDate={new Date()}
-              maxDate={new Date(2021, 1, 31)}
-      //         disabledDays={[
-      //   {
-      //     after: new Date(2021, 1, 31),
-      //     before: new Date(),
-      //   }
-      // ]}
-      />
             {/* <br/> */}
           </label>
           <br />
@@ -292,6 +280,7 @@ export default function LogInModal(props) {
           onMouseLeave={()=>{handleSubExit()}}
           >Submit
           </Button>
+          <Link to="/Admin" onClick={()=>{handleClose()}}>Orders </Link>
         </form>
       </div>
     </div>
@@ -300,13 +289,13 @@ export default function LogInModal(props) {
   return (
     <div>
         {/* <ThemeProvider theme={theme}> */}
-      <button
+      <div
       className={classes.button}
       onClick={handleOpen}
       onMouseEnter={handleEnter}
       onMouseLeave={handleExit}>
-      PROCEED TO CHECKOUT
-      </button>
+      Admin Login
+      </div>
       {/* </ThemeProvider> */}
       <Modal
         open={open}
@@ -314,6 +303,7 @@ export default function LogInModal(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
+
         {body}
       </Modal>
     </div>

@@ -54,7 +54,17 @@ const useRowStyles = makeStyles({
     marginLeft: 'auto',
     marginRight: 'auto',
     bottom: 0
+  },
+  quantityCell: {
+    display: 'table',
+    width: '100px',
+    tableLayout: 'fixed'
+  },
+  cellItem: {
+    display: 'table-cell',
+    textAlign: 'center'
   }
+
 });
 
 function InventoryRow(props) {
@@ -74,8 +84,10 @@ function InventoryRow(props) {
 <>
 <TableRow className={classes.root}>
 <TableCell align="right" component="th" scope="row">{row.product_name}</TableCell>
-<TableCell align="right">{row.quantity}</TableCell>
-<TableCell align="right">${props.convertPriceToString(row.price)}</TableCell>
+<TableCell align="right"><div className={classes.quantityCell}><button className={classes.cellItem}>-</button><span className={classes.cellItem}>{row.quantity}</span><button className={classes.cellItem}>+</button> </div></TableCell>
+<TableCell align="right">${props.convertPriceToString(row.price)}
+
+</TableCell>
 <TableCell align="right">{row.category}</TableCell>
 <button
 onMouseEnter={()=>{setHovered(true)}}

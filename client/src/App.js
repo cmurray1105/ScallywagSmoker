@@ -7,7 +7,8 @@ import {
   Link
 } from "react-router-dom";
 import Home from './components/Home';
-import Admin from './components/Admin'
+import Admin from './components/Admin/Admin'
+import LogInModal from './components/Admin/LogInModal'
 // import Orders from './components/Orders';
 export default class App extends React.Component {
   constructor(props) {
@@ -23,12 +24,8 @@ export default class App extends React.Component {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/Admin">
-            <Admin />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+        <Route path="/" exact component={Home} />
+        <Route path="/admin" component={Admin} />
         </Switch>
         <div>
         <nav>
@@ -37,7 +34,7 @@ export default class App extends React.Component {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/Admin">Orders</Link>
+              <LogInModal/>
             </li>
           </ul>
         </nav>

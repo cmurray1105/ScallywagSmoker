@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, makeStyles } from '@material-ui/core';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const useStyles = makeStyles({
   root: {
@@ -73,9 +75,14 @@ return (
         />
         <h4 className={classes.text}> {props.item.productInfo.product_name} ${props.convertPriceToString(props.item.quantity * props.item.productInfo.price)}</h4>
         <div className={classes.quantButton}>
-  <button className="value-button" id="decrease" onClick={handleDecrease}>-</button>
+  <button className="value-button" id="decrease" onClick={handleDecrease}>
+    <FontAwesomeIcon icon={faMinus} size="1x" ></FontAwesomeIcon>
+  </button>
   <span className={classes.quantString}>{props.item.quantity}</span>
-  <button className="value-button" id="increase" onClick={handleIncrease} value="Increase Value">+</button>
+  <button className="value-button" id="increase" onClick={handleIncrease} value="Increase Value">
+  <FontAwesomeIcon icon={faPlus} size="1x" ></FontAwesomeIcon>
+
+  </button>
 </div>
 
   </div>
