@@ -105,6 +105,8 @@ app.post("/addOrder", (req, res) => {
           }
         });
       }
+
+      db.getItemtoGo(()er)
       res.send(results);
     }
   });
