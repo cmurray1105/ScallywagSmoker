@@ -105,13 +105,6 @@ app.post("/addOrder", (req, res) => {
           }
         });
       }
-
-      db.getItemtoGo((err, result)=>{
-        if (err){
-          res.send(err)
-        } else {
-          // console.log(result)
-      res.send(result);
     }
   });
 });

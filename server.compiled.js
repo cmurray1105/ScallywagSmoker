@@ -108,8 +108,6 @@ app.post("/addOrder", function (req, res) {
           }
         });
       }
-
-      res.send(results);
     }
   });
 });
