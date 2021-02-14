@@ -18,8 +18,6 @@ export default class App extends React.Component {
   render(){
   return (
     <Router>
-
-
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>

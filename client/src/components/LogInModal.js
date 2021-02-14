@@ -144,69 +144,68 @@ export default function LogInModal(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("SUBMIT BEING HANDLED AND STUFF")
-    axios
-.post("/addOrder", {
-        address: streetAddress,
-        customerName: customerName,
-        deliveryDate: startDate,
-        neighborhood: neighborhood,
-        cartItems: props.cartItems,
-        email: email,
-        phone: phone
-      })
+//     axios
+// .post("/addOrder", {
+//         address: streetAddress,
+//         customerName: customerName,
+//         deliveryDate: startDate,
+//         neighborhood: neighborhood,
+//         cartItems: props.cartItems,
+//         email: email,
+//         phone: phone
+//       })
 
-      .then((result) => {
-        let generateItemList = ()=> {
-          let productString= ''
-          let products = []
-          for (let item in props.cartItems){
-            products.push(item)
-          }
-          for (let i = 0; i < products.length; i++){
-            if (i === products.length-1){
-              productString += `${products[i]}`
-            } else {
-              productString += `${products[i]}, `
-            }
-          }
-          console.log(productString)
-          return productString
-      }
-        let templateParams = {
-          from_name: 'christopher.murray.bbqdev@gmail.com',
-          to_name: email,
-          customerName: customerName,
-          message_html: generateItemList()
-         }
-        emailjs.send(
-          'service_6gxzrwa',
-          'template_fu5eins',
-           templateParams,
-          'user_975JwJzPB6r4yxiDzOfHn'
-     )
-        for (let item in props.cartItems){
-          axios
-          .post('./updateQuantity', {quantity: (props.cartItems[item].originalQuantity - props.cartItems[item].quantity), productName: item}).then((result)=>{
-            // console.log("result of update", result)
+//       .then((result) => {
+//         let generateItemList = ()=> {
+//           let productString= ''
+//           let products = []
+//           for (let item in props.cartItems){
+//             products.push(item)
+//           }
+//           for (let i = 0; i < products.length; i++){
+//             if (i === products.length-1){
+//               productString += `${products[i]}`
+//             } else {
+//               productString += `${products[i]}, `
+//             }
+//           }
+//           console.log(productString)
+//           return productString
+//       }
+//         let templateParams = {
+//           from_name: 'christopher.murray.bbqdev@gmail.com',
+//           to_name: email,
+//           customerName: customerName,
+//           message_html: generateItemList()
+//          }
+//         emailjs.send(
+//           'service_6gxzrwa',
+//           'template_fu5eins',
+//            templateParams,
+//           'user_975JwJzPB6r4yxiDzOfHn'
+//      )
+//         for (let item in props.cartItems){
+//           axios
+//           .post('./updateQuantity', {quantity: (props.cartItems[item].originalQuantity - props.cartItems[item].quantity), productName: item}).then((result)=>{
+//             // console.log("result of update", result)
 
-          })
-          .catch((err)=>{
-            console.log(err)
-          })
-        }
-          handleClose()
-          props.clearOrder()
+//           })
+//           .catch((err)=>{
+//             console.log(err)
+//           })
+//         }
+//           handleClose()
+//           props.clearOrder()
 
-      })
-        .catch((err)=>{
-          if (err){
-            console.log(err);
-          }
-        })
+//       })
+//         .catch((err)=>{
+//           if (err){
+//             console.log(err);
+//           }
+//         })
         }
 
   const body = (
-    <div></div>
     <div className={classes.paper}>
       <h2 id="simple-modal-title">Delivery Info</h2>
       <h3>Total ${props.priceString}</h3>
@@ -266,23 +265,6 @@ export default function LogInModal(props) {
             />
           </label>
           <br />
-          <label>
-            Delivery Date
-            <br />
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              minDate={new Date()}
-              maxDate={new Date(2021, 1, 31)}
-      //         disabledDays={[
-      //   {
-      //     after: new Date(2021, 1, 31),
-      //     before: new Date(),
-      //   }
-      // ]}
-      />
-            {/* <br/> */}
-          </label>
           <br />
           <Button
           className={classes.submitButton}
@@ -298,7 +280,7 @@ export default function LogInModal(props) {
   );
   console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
   return (
-    <div>
+    <>
         {/* <ThemeProvider theme={theme}> */}
       <button
       className={classes.button}
@@ -316,6 +298,6 @@ export default function LogInModal(props) {
       >
         {body}
       </Modal>
-    </div>
+    </>
   );
 }
